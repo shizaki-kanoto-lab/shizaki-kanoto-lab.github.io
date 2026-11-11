@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://shizaki-kanoto-lab.github.io/images/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#f5f4f0">
-<link rel="icon" href="images/logo.png" type="image/png">
+<link rel="icon" href="images/logo-64.png" type="image/png">
 <link rel="apple-touch-icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -147,7 +147,7 @@
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M14 1.5L25 7.75V20.25L14 26.5L3 20.25V7.75Z'/%3E%3C/svg%3E") center / contain no-repeat;
             mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M14 1.5L25 7.75V20.25L14 26.5L3 20.25V7.75Z'/%3E%3C/svg%3E") center / contain no-repeat;
   }
-  .nav .logo img { width: 28px; height: 28px; border-radius: 8px; display: block; }
+  .nav .logo img { width: 32px; height: 32px; display: block; }
   .nav .logo img + .mark { display: none; }
   .nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
   .nav ul a { display: block; padding: 6px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); font-family: var(--font-display); font-weight: 600; font-size: .9375rem; }
@@ -354,6 +354,15 @@
     background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
     overflow-wrap: anywhere;
   }
+  footer .wrap { position: relative; z-index: 1; }
+  footer::after { /* 右下に大きなロゴを透かしで */
+    content: ""; position: absolute; right: -60px; bottom: -80px; width: 360px; height: 360px;
+    background: url("images/logo-mono.png") center / contain no-repeat;
+    opacity: .06; pointer-events: none;
+  }
+  .foot-brand { display: flex; align-items: center; gap: clamp(12px, 2.4vw, 24px); margin: 0 0 28px; }
+  .foot-brand img { width: clamp(44px, 9vw, 96px); height: auto; flex: none; display: block; }
+  .foot-brand .wordmark { margin: 0; min-width: 0; font-size: clamp(1rem, 4.4vw, 3.5rem); }
   footer .copyright { margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); font-size: .8125rem; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -367,7 +376,7 @@
 <nav class="nav" aria-label="サイト">
   <div class="wrap">
     <a class="logo" href="#top">
-      <img src="images/logo.png" alt="" width="28" height="28" onerror="this.remove()">
+      <img src="images/logo-64.png" alt="" width="32" height="32" onerror="this.remove()">
       <span class="mark" aria-hidden="true"></span>
       <span class="name">shizaki-kanoto-lab</span>
     </a>
@@ -527,7 +536,10 @@
 
 <footer>
   <div class="wrap">
-    <p class="wordmark">shizaki-kanoto-lab</p>
+    <div class="foot-brand">
+      <img src="images/logo.png" alt="" width="96" height="96" loading="lazy">
+      <p class="wordmark">shizaki-kanoto-lab</p>
+    </div>
     <p>不具合・要望は各リポジトリの Issues か、X（<a href="https://x.com/shizaki_kanoto">@shizaki_kanoto</a>）までどうぞ。</p>
     <p><a href="https://github.com/shizaki-kanoto-lab">github.com/shizaki-kanoto-lab</a></p>
     <p class="copyright"><small>&copy; 2026 隠れ家クロウラ</small></p>
