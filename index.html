@@ -449,6 +449,21 @@
   .foot-brand .wordmark { margin: 0; min-width: 0; font-size: clamp(1rem, 4.4vw, 3.5rem); }
   footer .copyright { margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); font-size: .8125rem; }
 
+  /* ページ上部へ戻るボタン（少しスクロールしたら右下に出る） */
+  .to-top {
+    position: fixed; z-index: 40;
+    right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+    width: 48px; height: 48px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--grad); color: #fff;
+    box-shadow: 0 8px 24px rgba(112,72,232,.35), 0 2px 6px rgba(0,0,0,.2);
+    transition: opacity .25s ease, transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .2s ease;
+  }
+  .to-top:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(112,72,232,.45), 0 2px 6px rgba(0,0,0,.2); }
+  .to-top:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .js .to-top:not(.show) { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; }
+  @media (min-width: 640px) { .to-top { right: 24px; bottom: 24px; } }
+
   @media (prefers-reduced-motion: reduce) {
     *, .js .reveal { transition: none !important; }
     .js .reveal { opacity: 1; transform: none; }
@@ -638,6 +653,8 @@
   </div>
 </footer>
 
+<a class="to-top" href="#top" aria-label="ページの先頭へ戻る"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+
 <dialog class="lightbox" aria-label="画像の拡大表示">
   <button type="button" class="lb-close" aria-label="閉じる"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <button type="button" class="lb-nav lb-prev" aria-label="前の画像"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -826,6 +843,29 @@
       var t = lb && lb.thumb;
       if (t && t.dataset.base && !t.closest('.card').matches(':hover')) setShow(t, t.dataset.base);
       lb = null;
+    });
+  })();
+
+  // ページ上部へ戻るボタン：ヒーローを過ぎたら表示し、押したら先頭までスクロール
+  (function () {
+    var btn = document.querySelector('.to-top');
+    if (!btn) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      btn.classList.toggle('show', window.scrollY > Math.min(600, window.innerHeight * 0.8));
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      // スクロールの滑らかさは CSS の scroll-behavior（動きを減らす設定なら即時）に任せる
+      window.scrollTo({ top: 0 });
+      // URL に #top を残さず、キーボード操作の起点もページ先頭に戻す
+      var first = document.querySelector('.nav a');
+      if (first) first.focus({ preventScroll: true });
     });
   })();
 </script>
