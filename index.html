@@ -4,38 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>shizaki-kanoto-lab</title>
-<meta name="description" content="TRPG の日程調整・キャラクターシート管理・Discord 運営を楽にするための小さなツール集です。">
+<meta name="description" content="TRPG の日程調整・キャラクターシート管理・Discord 運営を楽にするために作ったツールのポートフォリオです。">
 <meta property="og:title" content="shizaki-kanoto-lab">
-<meta property="og:description" content="TRPG の日程調整・キャラクターシート管理・Discord 運営を楽にするための小さなツール集です。">
+<meta property="og:description" content="TRPG の日程調整・キャラクターシート管理・Discord 運営を楽にするために作ったツールのポートフォリオです。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shizaki-kanoto-lab.github.io/">
+<meta property="og:image" content="https://shizaki-kanoto-lab.github.io/images/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/logo.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo.png">
 <style>
   :root {
-    --bg: #f7f6f3;
+    --bg: #f6f4ef;
     --surface: #ffffff;
-    --text: #1f2328;
-    --muted: #5d636b;
-    --border: #e3e1dc;
+    --text: #1d2026;
+    --muted: #5b616a;
+    --border: #e4e0d8;
     --accent: #3b5bdb;
     --accent-soft: #e8edff;
-    --tag-bg: #f0eee9;
-    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.04);
+    --tag-bg: #f0ede6;
+    --shadow: 0 1px 2px rgba(20,20,30,.04), 0 8px 24px rgba(20,20,30,.06);
+    --shadow-hover: 0 2px 4px rgba(20,20,30,.06), 0 16px 40px rgba(20,20,30,.10);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #16181c;
-      --surface: #1f2228;
-      --text: #e6e8eb;
-      --muted: #9aa1aa;
-      --border: #2e323a;
+      --bg: #14161a;
+      --surface: #1d2026;
+      --text: #e7e9ec;
+      --muted: #9ba2ab;
+      --border: #2d3139;
       --accent: #8ea6ff;
       --accent-soft: #262d45;
-      --tag-bg: #2a2e35;
-      --shadow: none;
+      --tag-bg: #2a2e36;
+      --shadow: 0 1px 2px rgba(0,0,0,.3);
+      --shadow-hover: 0 12px 32px rgba(0,0,0,.45);
     }
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
@@ -45,148 +51,248 @@
     font-size: 16px;
   }
   a { color: var(--accent); }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
 
-  header { padding: 64px 0 40px; }
-  header h1 {
-    margin: 0 0 12px;
-    font-size: clamp(1.75rem, 5vw, 2.5rem);
-    line-height: 1.25;
-    letter-spacing: .01em;
-  }
-  header p { margin: 0; color: var(--muted); max-width: 40em; }
-  header .eyebrow { font-size: .8125rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  .stats { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .875rem; color: var(--muted); }
-  .stats strong { font-size: 1.25rem; color: var(--text); margin-right: 2px; }
-  .main-title { font-size: 1.25rem; margin: 0 0 24px; }
-
-  section { margin-bottom: 48px; }
-  section h2 {
-    font-size: .8125rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-    color: var(--muted);
-    margin: 0 0 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .grid {
+  /* ---------- hero ---------- */
+  .hero {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+    padding: 48px 0 56px;
   }
+  @media (min-width: 840px) {
+    .hero { grid-template-columns: 1.05fr 1fr; gap: 48px; padding: 80px 0 72px; }
+  }
+  .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .brand img { width: 48px; height: 48px; border-radius: 12px; display: block; }
+  .brand .eyebrow { font-size: .8125rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  .hero h1 { margin: 0 0 16px; font-size: clamp(2rem, 6vw, 3.25rem); line-height: 1.15; letter-spacing: -.01em; }
+  .hero p.lead { margin: 0; color: var(--muted); font-size: 1.0625rem; max-width: 34em; }
+  .stats { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .stats li { font-size: .8125rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 12px; }
+  .stats li strong { color: var(--text); }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-hover);
+    background:
+      radial-gradient(circle at 20% 25%, rgba(255,255,255,.35) 0 8%, transparent 9%),
+      radial-gradient(circle at 78% 70%, rgba(255,255,255,.22) 0 12%, transparent 13%),
+      radial-gradient(circle at 65% 22%, rgba(255,255,255,.18) 0 5%, transparent 6%),
+      linear-gradient(135deg, #3b5bdb 0%, #7048e8 55%, #c2255c 100%);
+  }
+  .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ---------- sections ---------- */
+  .works-title { font-size: clamp(1.5rem, 4vw, 2rem); margin: 0 0 8px; }
+  .works-sub { margin: 0 0 32px; color: var(--muted); }
+  section.group { margin-bottom: 56px; }
+  section.group h2 {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1rem; font-weight: 700;
+    margin: 0 0 20px;
+  }
+  section.group h2::before {
+    content: ""; width: 10px; height: 10px; border-radius: 3px;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+  }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  @media (max-width: 360px) { .grid { grid-template-columns: 1fr; } }
+
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 16px;
+    overflow: hidden;
     box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .card h3 { margin: 0 0 4px; font-size: 1.125rem; line-height: 1.4; }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+  .thumb {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .thumb .ph {
+    color: rgba(255,255,255,.95);
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 0 24px;
+    line-height: 1.4;
+    text-shadow: 0 1px 8px rgba(0,0,0,.2);
+  }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .card .body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+  .card h3 { margin: 0 0 2px; font-size: 1.125rem; line-height: 1.4; }
   .card .repo { margin: 0 0 12px; font-size: .8125rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
-  .card .shot { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); margin: 0 0 12px; }
   .card p.desc { margin: 0 0 16px; font-size: .9375rem; flex: 1; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 16px; padding: 0; list-style: none; }
   .tags li { background: var(--tag-bg); color: var(--muted); font-size: .75rem; padding: 2px 10px; border-radius: 999px; }
   .links { display: flex; flex-wrap: wrap; gap: 8px; }
+
   .btn {
     display: inline-block;
-    font-size: .875rem;
-    font-weight: 600;
+    font-size: .875rem; font-weight: 600;
     text-decoration: none;
-    padding: 6px 14px;
-    border-radius: 8px;
+    padding: 7px 16px;
+    border-radius: 10px;
     border: 1px solid var(--border);
     color: var(--text);
+    background: var(--surface);
+    transition: border-color .15s ease;
   }
   .btn.primary { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+  .btn.solid { background: var(--accent); border-color: transparent; color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.solid { color: #10131a; } }
   .btn:hover { border-color: var(--accent); }
   .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  footer { padding: 24px 0 48px; color: var(--muted); font-size: .875rem; border-top: 1px solid var(--border); }
+  .g-schedule { --c1: #1c7ed6; --c2: #0ca678; }
+  .g-sheet    { --c1: #e8590c; --c2: #ae3ec9; }
+  .g-discord  { --c1: #4c6ef5; --c2: #7950f2; }
+
+  footer { padding: 28px 0 56px; color: var(--muted); font-size: .875rem; border-top: 1px solid var(--border); }
   footer p { margin: 0 0 4px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <p class="eyebrow">Portfolio</p>
-    <h1>shizaki-kanoto-lab</h1>
-    <p>TRPG を遊ぶ中で「ここが面倒だな」と思ったところを、自分で作って解決してきたツールの置き場です。日程調整、キャラクターシートの管理、Discord サーバーの運営まわりのものを公開しています。</p>
-    <ul class="stats" aria-label="概要">
-      <li><strong>5</strong>作品</li>
-      <li>Google Apps Script / Notion API / Discord Bot / Chrome 拡張 / Cloudflare Workers / Python</li>
-    </ul>
+  <header class="hero">
+    <div>
+      <div class="brand">
+        <img src="images/logo.png" alt="" width="48" height="48" onerror="this.remove()">
+        <span class="eyebrow">Portfolio</span>
+      </div>
+      <h1>shizaki-kanoto-lab</h1>
+      <p class="lead">TRPG を遊ぶ中で「ここが面倒だな」と思ったところを、自分で作って解決してきたツールの置き場です。日程調整、キャラクターシートの管理、Discord サーバーの運営まわりのものを公開しています。</p>
+      <ul class="stats" aria-label="概要">
+        <li><strong>5</strong> 作品</li>
+        <li>Google Apps Script</li>
+        <li>Notion API</li>
+        <li>Discord Bot</li>
+        <li>Chrome 拡張</li>
+        <li>Cloudflare Workers</li>
+        <li>Python</li>
+      </ul>
+      <div class="cta">
+        <a class="btn solid" href="#works">作品を見る</a>
+        <a class="btn" href="https://github.com/shizaki-kanoto-lab">GitHub</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="images/hero.jpg" alt="" width="1600" height="1200" onerror="this.remove()">
+    </div>
   </header>
 
-  <main>
-    <h2 class="main-title">Works</h2>
-    <section aria-labelledby="sec-schedule">
+  <main id="works">
+    <h2 class="works-title">Works</h2>
+    <p class="works-sub">用途ごとにまとめています。</p>
+
+    <section class="group g-schedule" aria-labelledby="sec-schedule">
       <h2 id="sec-schedule">日程調整</h2>
       <div class="grid">
         <article class="card">
-          <h3>空き日程抽出ツール</h3>
-          <p class="repo">proposed_date_tool</p>
-          <p class="desc">Google カレンダーの予定から、昼か夜のどちらかが空いている日を抜き出し、日程調整ツールにそのまま貼れる形で一覧にします。ブラウザで開いて Google でログインするだけで使えます。</p>
-          <ul class="tags"><li>Web</li><li>Google Apps Script</li><li>Google カレンダー</li></ul>
-          <div class="links">
-            <a class="btn primary" href="https://shizaki-kanoto-lab.github.io/proposed_date_tool/">使ってみる</a>
-            <a class="btn" href="https://github.com/shizaki-kanoto-lab/proposed_date_tool">GitHub</a>
+          <div class="thumb">
+            <span class="ph">空き日程抽出ツール</span>
+            <img src="images/works/proposed_date_tool.jpg" alt="空き日程抽出ツールの画面" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h3>空き日程抽出ツール</h3>
+            <p class="repo">proposed_date_tool</p>
+            <p class="desc">Google カレンダーの予定から、昼か夜のどちらかが空いている日を抜き出し、日程調整ツールにそのまま貼れる形で一覧にします。ブラウザで開いて Google でログインするだけで使えます。</p>
+            <ul class="tags"><li>Web</li><li>Google Apps Script</li><li>Google カレンダー</li></ul>
+            <div class="links">
+              <a class="btn primary" href="https://shizaki-kanoto-lab.github.io/proposed_date_tool/">使ってみる</a>
+              <a class="btn" href="https://github.com/shizaki-kanoto-lab/proposed_date_tool">GitHub</a>
+            </div>
           </div>
         </article>
 
         <article class="card">
-          <h3>空き枠を Notion に追加するツール</h3>
-          <p class="repo">trpg_availability2notion</p>
-          <p class="desc">カレンダーから朝・昼・夜の空き枠を判定し、確認してから Notion の空き枠表に登録します。登録したら Discord に「◯月まで最新化しました」と通知します。</p>
-          <ul class="tags"><li>Google Apps Script</li><li>Notion</li><li>Discord</li></ul>
-          <div class="links">
-            <a class="btn" href="https://github.com/shizaki-kanoto-lab/trpg_availability2notion">GitHub</a>
+          <div class="thumb">
+            <span class="ph">空き枠を Notion に追加するツール</span>
+            <img src="images/works/trpg_availability2notion.jpg" alt="Notion の空き枠表と Discord への通知" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h3>空き枠を Notion に追加するツール</h3>
+            <p class="repo">trpg_availability2notion</p>
+            <p class="desc">カレンダーから朝・昼・夜の空き枠を判定し、確認してから Notion の空き枠表に登録します。登録したら Discord に「◯月まで最新化しました」と通知します。</p>
+            <ul class="tags"><li>Google Apps Script</li><li>Notion</li><li>Discord</li></ul>
+            <div class="links">
+              <a class="btn" href="https://github.com/shizaki-kanoto-lab/trpg_availability2notion">GitHub</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section aria-labelledby="sec-sheet">
+    <section class="group g-sheet" aria-labelledby="sec-sheet">
       <h2 id="sec-sheet">キャラクターシート</h2>
       <div class="grid">
         <article class="card">
-          <h3>キャラクターシート帳</h3>
-          <p class="repo">trpg_charsheet_book</p>
-          <img class="shot" src="images/charsheet_book.jpg" alt="キャラクターシート帳の画面。左にタグで絞り込めるキャラクター一覧、上に検索と表示切り替えがある" width="800" height="500" loading="lazy">
-          <p class="desc">各サイトのキャラクターシートを Chrome 拡張で Notion に集め、システム・タグ・技能値で絞り込める一覧ページにします。300枚以上のシートを管理しています（閲覧ページは非公開）。</p>
-          <ul class="tags"><li>Chrome 拡張</li><li>Notion</li><li>GitHub Actions</li></ul>
-          <div class="links">
-            <a class="btn" href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book">GitHub</a>
+          <div class="thumb">
+            <span class="ph">キャラクターシート帳</span>
+            <img src="images/works/trpg_charsheet_book.jpg" alt="キャラクターシート帳の画面。左にタグで絞り込めるキャラクター一覧、上に検索と表示切り替えがある" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h3>キャラクターシート帳</h3>
+            <p class="repo">trpg_charsheet_book</p>
+            <p class="desc">各サイトのキャラクターシートを Chrome 拡張で Notion に集め、システム・タグ・技能値で絞り込める一覧ページにします。300枚以上のシートを管理しています（閲覧ページは非公開）。</p>
+            <ul class="tags"><li>Chrome 拡張</li><li>Notion</li><li>GitHub Actions</li></ul>
+            <div class="links">
+              <a class="btn" href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book">GitHub</a>
+            </div>
           </div>
         </article>
 
         <article class="card">
-          <h3>ケダモノオペラ CS コピー</h3>
-          <p class="repo">kedamono-cs-copy</p>
-          <p class="desc">『ケダモノオペラ』のキャラクターシートを Notion で管理し、ボタンひとつで Discord に貼れる形にコピーします。ファンが作った非公式ツールです。</p>
-          <ul class="tags"><li>Notion</li><li>Discord</li></ul>
-          <div class="links">
-            <a class="btn primary" href="https://shizaki-kanoto-lab.github.io/kedamono-cs-copy/">使ってみる</a>
-            <a class="btn" href="https://github.com/shizaki-kanoto-lab/kedamono-cs-copy">GitHub</a>
+          <div class="thumb">
+            <span class="ph">ケダモノオペラ CS コピー</span>
+            <img src="images/works/kedamono-cs-copy.jpg" alt="Notion の CS 表と、Discord に貼り付けた CS" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h3>ケダモノオペラ CS コピー</h3>
+            <p class="repo">kedamono-cs-copy</p>
+            <p class="desc">『ケダモノオペラ』のキャラクターシートを Notion で管理し、ボタンひとつで Discord に貼れる形にコピーします。ファンが作った非公式ツールです。</p>
+            <ul class="tags"><li>Notion</li><li>Discord</li></ul>
+            <div class="links">
+              <a class="btn primary" href="https://shizaki-kanoto-lab.github.io/kedamono-cs-copy/">使ってみる</a>
+              <a class="btn" href="https://github.com/shizaki-kanoto-lab/kedamono-cs-copy">GitHub</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section aria-labelledby="sec-discord">
+    <section class="group g-discord" aria-labelledby="sec-discord">
       <h2 id="sec-discord">Discord</h2>
       <div class="grid">
         <article class="card">
-          <h3>チャンネル一括削除</h3>
-          <p class="repo">purge_discord_channels</p>
-          <p class="desc">Discord の特定カテゴリにあるテキストチャンネルを、削除前に一覧で確認してからまとめて削除します。Discord 上の <code>/purge</code> コマンドでも、手元の PC からでも使えます。</p>
-          <ul class="tags"><li>Cloudflare Workers</li><li>Python</li><li>MIT</li></ul>
-          <div class="links">
-            <a class="btn" href="https://github.com/shizaki-kanoto-lab/purge_discord_channels">GitHub</a>
+          <div class="thumb">
+            <span class="ph">チャンネル一括削除</span>
+            <img src="images/works/purge_discord_channels.jpg" alt="Discord で /purge コマンドを実行し、削除対象の一覧を確認している画面" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h3>チャンネル一括削除</h3>
+            <p class="repo">purge_discord_channels</p>
+            <p class="desc">Discord の特定カテゴリにあるテキストチャンネルを、削除前に一覧で確認してからまとめて削除します。Discord 上の <code>/purge</code> コマンドでも、手元の PC からでも使えます。</p>
+            <ul class="tags"><li>Cloudflare Workers</li><li>Python</li><li>MIT</li></ul>
+            <div class="links">
+              <a class="btn" href="https://github.com/shizaki-kanoto-lab/purge_discord_channels">GitHub</a>
+            </div>
           </div>
         </article>
       </div>
