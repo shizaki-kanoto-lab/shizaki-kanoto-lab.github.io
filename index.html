@@ -734,16 +734,32 @@
       dlg.showModal();
     }
 
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+
     document.querySelectorAll('.thumb').forEach(function (thumb) {
       refresh(thumb);
       thumb.addEventListener('click', function (e) {
         var b = e.target.closest('.view-seg button');
-        if (b) { e.stopPropagation(); setShow(thumb, b.dataset.v); return; }
+        if (b) { e.stopPropagation(); thumb.dataset.base = b.dataset.v; setShow(thumb, b.dataset.v); return; }
         if (thumb.classList.contains('zoomable')) openLightbox(thumb);
       });
       thumb.addEventListener('keydown', function (e) {
         if (e.target !== thumb) return;
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(thumb); }
+      });
+
+      // マウスでカードに乗っている間は、もう一方の画像を見せる（タッチ端末では何もしない）
+      var card = thumb.closest('.card');
+      card.addEventListener('mouseenter', function () {
+        if (!canHover.matches) return;
+        var views = viewsOf(thumb).map(function (i) { return i.dataset.view; });
+        if (views.length < 2) return;
+        thumb.dataset.base = thumb.dataset.show;
+        setShow(thumb, views[(views.indexOf(thumb.dataset.show) + 1) % views.length]);
+      });
+      card.addEventListener('mouseleave', function () {
+        if (!canHover.matches || !thumb.dataset.base || dlg.open) return;
+        setShow(thumb, thumb.dataset.base);
       });
     });
 
@@ -751,19 +767,26 @@
       var b = e.target.closest('button');
       if (!b || !lb) return;
       lb.show = b.dataset.v; lbRender();
-      setShow(lb.thumb, lb.show);
+      lb.thumb.dataset.base = lb.show; setShow(lb.thumb, lb.show);
       lbSeg.querySelector('[data-v="' + lb.show + '"]').focus();
     });
     dlg.addEventListener('keydown', function (e) {
       if (!lb || lb.views.length < 2 || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
       var i = lb.views.indexOf(lb.show) + (e.key === 'ArrowRight' ? 1 : -1);
       lb.show = lb.views[(i + lb.views.length) % lb.views.length];
-      lbRender(); setShow(lb.thumb, lb.show);
+      lbRender(); lb.thumb.dataset.base = lb.show; setShow(lb.thumb, lb.show);
     });
     dlg.querySelector('.lb-close').addEventListener('click', function () { dlg.close(); });
     // 画像の外側（暗い部分）をクリックしたら閉じる
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-    dlg.addEventListener('close', function () { document.documentElement.style.overflow = ''; lbImg.removeAttribute('src'); lb = null; });
+    dlg.addEventListener('close', function () {
+      document.documentElement.style.overflow = '';
+      lbImg.removeAttribute('src');
+      // 閉じたときにマウスがカードの外なら、ホバー前の表示に戻す
+      var t = lb && lb.thumb;
+      if (t && t.dataset.base && !t.closest('.card').matches(':hover')) setShow(t, t.dataset.base);
+      lb = null;
+    });
   })();
 </script>
 </body>
