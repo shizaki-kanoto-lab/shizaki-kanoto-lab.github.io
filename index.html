@@ -19,6 +19,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Geist:wght@800&family=Outfit:wght@400;600;700;800&family=Klee+One:wght@600&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script>
   document.documentElement.classList.add('js');
+  // 下のスクリプトが読み込まれる前に画像が失敗しても、壊れた画像を残さない
+  window.thumbImgError = function (img) { img.remove(); };
   try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
 </script>
 <style>
@@ -97,6 +99,7 @@
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
   body {
     margin: 0;
+    overflow-x: clip; /* ヒーロー画像の光彩がスマホで右にはみ出して横スクロールになるのを防ぐ */
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
@@ -323,12 +326,65 @@
     text-align: center; padding: 0 24px; line-height: 1.4;
     text-shadow: 0 2px 12px rgba(0,0,0,.18);
   }
-  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .35s ease; }
   .card:hover .thumb img { transform: scale(1.04); }
   /* 横長のバナーは全体を見せ、余白は同じ画像をぼかして埋める */
   .thumb img.fit { object-fit: contain; }
   .thumb img.backdrop { filter: blur(18px) brightness(.55) saturate(1.2); transform: scale(1.25); }
   .card:hover .thumb img.backdrop { transform: scale(1.3); }
+
+  /* イメージ画像とキャプチャの切り替え・拡大表示 */
+  .thumb[data-show="image"] img[data-view="capture"],
+  .thumb[data-show="capture"] img[data-view="image"] { opacity: 0; pointer-events: none; }
+  .thumb.zoomable { cursor: zoom-in; }
+  .thumb.zoomable:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+  .thumb .zoom-hint {
+    position: absolute; top: 10px; right: 10px; z-index: 3;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: rgba(20,14,26,.62); color: #fff;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    opacity: 0; transform: scale(.85); transition: opacity .2s ease, transform .2s ease;
+  }
+  .card:hover .zoom-hint, .thumb:focus-visible .zoom-hint { opacity: 1; transform: none; }
+  @media (hover: none) { .thumb .zoom-hint { opacity: 1; transform: none; } }
+  .view-seg {
+    display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px;
+    background: rgba(20,14,26,.62);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+  .thumb .view-seg { position: absolute; right: 10px; bottom: 10px; z-index: 3; }
+  .view-seg button {
+    appearance: none; border: 0; margin: 0; cursor: pointer;
+    font: 600 .75rem/1 var(--font-body); color: #ece2f2; background: none;
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .view-seg button[aria-pressed="true"] { background: #fff; color: #3a2850; }
+  .view-seg button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+
+  .lightbox {
+    width: 100vw; height: 100dvh; max-width: none; max-height: none;
+    margin: 0; padding: 0; border: 0; background: transparent; color: #fff;
+  }
+  .lightbox::backdrop { background: rgba(10,6,14,.86); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+  .lightbox[open] { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 56px 16px 24px; }
+  .lightbox .lb-img {
+    max-width: min(1400px, 100%); max-height: calc(100dvh - 160px);
+    width: auto; height: auto; object-fit: contain; border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5); background: #fff;
+  }
+  .lightbox .lb-title { margin: 0; font-family: var(--font-title); font-weight: 600; font-size: 1.125rem; -webkit-text-stroke: .5px currentColor; text-align: center; }
+  .lightbox .lb-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255,255,255,.14); color: #fff; display: grid; place-items: center;
+  }
+  .lightbox .lb-close:hover { background: rgba(255,255,255,.24); }
+  .lightbox .lb-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .lightbox[open] .lb-img { animation: lb-in .25s cubic-bezier(.2,.7,.2,1); }
+    @keyframes lb-in { from { opacity: 0; transform: scale(.96); } }
+  }
 
   .card .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
   .card h4 { margin: 0 0 2px; font-family: var(--font-title); font-size: 1.25rem; font-weight: 600; line-height: 1.45; word-break: auto-phrase; -webkit-text-stroke: .5px currentColor; }
@@ -445,7 +501,8 @@
         <article class="card">
           <div class="thumb">
             <span class="ph">空き日程抽出ツール</span>
-            <img src="images/works/proposed_date_tool.jpg" alt="空き日程抽出ツールの画面。期間を選んで「予定を取得」を押すと、空いている日が一覧で出る" width="768" height="480" loading="lazy" onerror="this.remove()">
+            <img data-view="capture" src="images/works/proposed_date_tool.jpg" alt="空き日程抽出ツールの画面。期間を選んで「予定を取得」を押すと、空いている日が一覧で出る" width="768" height="480" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="image" src="images/works/proposed_date_tool-image.jpg" alt="ノートパソコンにカレンダーが開き、空いた日にチェックが付いている。虫眼鏡で空き日を見つけ、横に抜き出した日のリストが出ているイラスト" width="1280" height="853" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <h4>空き日程抽出ツール</h4>
@@ -462,7 +519,8 @@
         <article class="card">
           <div class="thumb">
             <span class="ph">空き枠をNotionに追加するツール</span>
-            <img style="object-position: 70% 50%" src="images/works/trpg_availability2notion.jpg" alt="ノートパソコンの画面に朝・昼・夜の空き枠を OK と NG で並べたイラスト。横にカレンダーと20面ダイス" width="1280" height="720" loading="lazy" onerror="this.remove()">
+            <img data-view="image" style="object-position: 70% 50%" src="images/works/trpg_availability2notion.jpg" alt="ノートパソコンの画面に朝・昼・夜の空き枠を OK と NG で並べたイラスト。横にカレンダーと20面ダイス" width="1280" height="720" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="capture" style="object-position: 50% 0" src="images/works/trpg_availability2notion-capture.jpg" alt="空き枠をNotionに追加するツールの画面。取得期間とオプションの下に、日付ごとの朝・昼・夜の OK / NG が並び、下に「選択した空き枠をNotionに追加」ボタンがある" width="880" height="963" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <h4>空き枠をNotionに追加するツール</h4>
@@ -483,7 +541,8 @@
         <article class="card">
           <div class="thumb">
             <span class="ph">キャラクターシート帳</span>
-            <img src="images/works/trpg_charsheet_book.jpg" alt="キャラクターシート帳の画面。左にタグで絞り込めるキャラクター一覧、上に検索と表示切り替えがある" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+            <img data-view="capture" src="images/works/trpg_charsheet_book.jpg" alt="キャラクターシート帳の画面。左にタグで絞り込めるキャラクター一覧、上に検索と表示切り替えがある" width="1600" height="1000" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="image" src="images/works/trpg_charsheet_book-image.jpg" alt="キャラクターシート帳のイメージ。Chrome 拡張の「シート帳へ送る」から Notion のデータベースに集まり、ノートパソコンとスマホの一覧ページに表示される" width="1600" height="900" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <h4>キャラクターシート帳</h4>
@@ -499,7 +558,8 @@
         <article class="card">
           <div class="thumb">
             <span class="ph">ケダモノオペラCSコピー</span>
-            <img src="images/works/kedamono-cs-copy.jpg" alt="赤い幕の劇場の舞台に「ケダモノオペラ CSコピー 非公式ファンツール」と書かれた羊皮紙が浮かび、まわりを小さな紙片が舞っている" width="1500" height="600" loading="lazy" onerror="this.remove()">
+            <img data-view="image" src="images/works/kedamono-cs-copy.jpg" alt="赤い幕の劇場の舞台に「ケダモノオペラ CSコピー 非公式ファンツール」と書かれた羊皮紙が浮かび、まわりを小さな紙片が舞っている" width="1500" height="600" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="capture" style="object-position: 50% 0" src="images/works/kedamono-cs-copy-capture.jpg" alt="ケダモノオペラCSコピーの画面。「コピーしました」と「もう一度コピー」ボタンの下に、Discord に貼れる形のキャラクターシートが出ている" width="720" height="730" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <h4>ケダモノオペラCSコピー</h4>
@@ -521,8 +581,9 @@
         <article class="card">
           <div class="thumb">
             <span class="ph">チャンネル一括削除</span>
-            <img class="backdrop" src="images/works/purge_discord_channels.jpg" alt="" aria-hidden="true" width="1600" height="564" loading="lazy" onerror="this.remove()">
-            <img class="fit" src="images/works/purge_discord_channels.jpg" alt="DeleteCat のバナー。黒猫がチャンネルの入ったフォルダを爪で引き裂いている" width="1600" height="564" loading="lazy" onerror="this.remove()">
+            <img data-view="image" class="backdrop" src="images/works/purge_discord_channels.jpg" alt="" aria-hidden="true" width="1600" height="564" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="image" class="fit" src="images/works/purge_discord_channels.jpg" alt="DeleteCat のバナー。黒猫がチャンネルの入ったフォルダを爪で引き裂いている" width="1600" height="564" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="capture" style="object-position: 0 50%" src="images/works/purge_discord_channels-capture.jpg" alt="Discord で /purge を使ったときの返信。削除対象のチャンネルと最終活動日が並び、「削除する」と「キャンセル」のボタンがある" width="1229" height="258" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <h4>チャンネル一括削除</h4>
@@ -550,6 +611,13 @@
     <p class="copyright"><small>&copy; 2026 隠れ家クロウラ</small></p>
   </div>
 </footer>
+
+<dialog class="lightbox" aria-label="画像の拡大表示">
+  <button type="button" class="lb-close" aria-label="閉じる"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <img class="lb-img" alt="">
+  <p class="lb-title"></p>
+  <div class="view-seg" role="group" aria-label="表示する画像"></div>
+</dialog>
 
 <script>
   (function () {
@@ -580,6 +648,118 @@
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (e) { io.observe(e); });
+  })();
+
+  // サムネイル: イメージ画像とキャプチャの切り替えと、クリックで拡大表示
+  (function () {
+    var LABELS = { image: 'イメージ', capture: '画面' };
+    var ORDER = ['image', 'capture'];
+    var ZOOM_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+    var dlg = document.querySelector('.lightbox');
+    var lbImg = dlg.querySelector('.lb-img');
+    var lbTitle = dlg.querySelector('.lb-title');
+    var lbSeg = dlg.querySelector('.view-seg');
+    var lb = null; // { views, srcs, alts, show }
+
+    // 表示用の画像（ぼかし背景を除く）を view ごとに集める
+    function viewsOf(thumb) {
+      var found = {};
+      thumb.querySelectorAll('img[data-view]:not(.backdrop)').forEach(function (img) { found[img.dataset.view] = img; });
+      return ORDER.filter(function (v) { return found[v]; }).map(function (v) { return found[v]; });
+    }
+
+    function segHTML(views, show) {
+      return views.map(function (v) {
+        return '<button type="button" data-v="' + v + '" aria-pressed="' + (v === show) + '">' + LABELS[v] + '</button>';
+      }).join('');
+    }
+
+    function setShow(thumb, v) {
+      thumb.dataset.show = v;
+      thumb.querySelectorAll('.view-seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === v); });
+    }
+
+    function refresh(thumb) {
+      var imgs = viewsOf(thumb);
+      var views = imgs.map(function (i) { return i.dataset.view; });
+      var title = thumb.closest('.card').querySelector('h4').textContent;
+      var old = thumb.querySelector('.view-seg'); if (old) old.remove();
+      var hint = thumb.querySelector('.zoom-hint');
+      if (!views.length) {
+        thumb.classList.remove('zoomable'); thumb.removeAttribute('role'); thumb.removeAttribute('tabindex'); thumb.removeAttribute('aria-label');
+        if (hint) hint.remove();
+        return;
+      }
+      if (views.indexOf(thumb.dataset.show) < 0) thumb.dataset.show = views[0];
+      thumb.classList.add('zoomable');
+      thumb.setAttribute('role', 'button');
+      thumb.setAttribute('tabindex', '0');
+      thumb.setAttribute('aria-label', title + 'の画像を拡大する');
+      if (!hint) thumb.insertAdjacentHTML('beforeend', '<span class="zoom-hint" aria-hidden="true">' + ZOOM_ICON + '</span>');
+      if (views.length > 1) {
+        var seg = document.createElement('div');
+        seg.className = 'view-seg';
+        seg.setAttribute('role', 'group');
+        seg.setAttribute('aria-label', '表示する画像');
+        seg.innerHTML = segHTML(views, thumb.dataset.show);
+        thumb.appendChild(seg);
+      }
+    }
+
+    window.thumbImgError = function (img) {
+      var thumb = img.closest('.thumb');
+      img.remove();
+      if (thumb) refresh(thumb);
+    };
+
+    function lbRender() {
+      lbImg.src = lb.srcs[lb.show];
+      lbImg.alt = lb.alts[lb.show];
+      lbSeg.hidden = lb.views.length < 2;
+      lbSeg.innerHTML = segHTML(lb.views, lb.show);
+    }
+
+    function openLightbox(thumb) {
+      var imgs = viewsOf(thumb);
+      if (!imgs.length) return;
+      lb = { views: [], srcs: {}, alts: {}, show: thumb.dataset.show, thumb: thumb };
+      imgs.forEach(function (i) { lb.views.push(i.dataset.view); lb.srcs[i.dataset.view] = i.currentSrc || i.src; lb.alts[i.dataset.view] = i.alt; });
+      lbTitle.textContent = thumb.closest('.card').querySelector('h4').textContent;
+      lbRender();
+      document.documentElement.style.overflow = 'hidden';
+      dlg.showModal();
+    }
+
+    document.querySelectorAll('.thumb').forEach(function (thumb) {
+      refresh(thumb);
+      thumb.addEventListener('click', function (e) {
+        var b = e.target.closest('.view-seg button');
+        if (b) { e.stopPropagation(); setShow(thumb, b.dataset.v); return; }
+        if (thumb.classList.contains('zoomable')) openLightbox(thumb);
+      });
+      thumb.addEventListener('keydown', function (e) {
+        if (e.target !== thumb) return;
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(thumb); }
+      });
+    });
+
+    lbSeg.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (!b || !lb) return;
+      lb.show = b.dataset.v; lbRender();
+      setShow(lb.thumb, lb.show);
+      lbSeg.querySelector('[data-v="' + lb.show + '"]').focus();
+    });
+    dlg.addEventListener('keydown', function (e) {
+      if (!lb || lb.views.length < 2 || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
+      var i = lb.views.indexOf(lb.show) + (e.key === 'ArrowRight' ? 1 : -1);
+      lb.show = lb.views[(i + lb.views.length) % lb.views.length];
+      lbRender(); setShow(lb.thumb, lb.show);
+    });
+    dlg.querySelector('.lb-close').addEventListener('click', function () { dlg.close(); });
+    // 画像の外側（暗い部分）をクリックしたら閉じる
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', function () { document.documentElement.style.overflow = ''; lbImg.removeAttribute('src'); lb = null; });
   })();
 </script>
 </body>
