@@ -25,6 +25,14 @@
     --tag-bg: #f0ede6;
     --shadow: 0 1px 2px rgba(20,20,30,.04), 0 8px 24px rgba(20,20,30,.06);
     --shadow-hover: 0 2px 4px rgba(20,20,30,.06), 0 16px 40px rgba(20,20,30,.10);
+    --blob1: rgba(76,110,245,.20);
+    --blob2: rgba(174,62,201,.14);
+    --blob3: rgba(12,166,120,.14);
+    --dot: rgba(40,40,60,.16);
+    --pattern-opacity: 1;
+    --panel-alpha: 9%;
+    --footer-bg: #1d2026;
+    --footer-text: #c9ced6;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -38,6 +46,14 @@
       --tag-bg: #2a2e36;
       --shadow: 0 1px 2px rgba(0,0,0,.3);
       --shadow-hover: 0 12px 32px rgba(0,0,0,.45);
+      --blob1: rgba(76,110,245,.22);
+      --blob2: rgba(174,62,201,.16);
+      --blob3: rgba(12,166,120,.12);
+      --dot: rgba(255,255,255,.07);
+      --pattern-opacity: .6;
+      --panel-alpha: 14%;
+      --footer-bg: #0d0f12;
+      --footer-text: #9ba2ab;
     }
   }
   * { box-sizing: border-box; }
@@ -51,7 +67,28 @@
     font-size: 16px;
   }
   a { color: var(--accent); }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; position: relative; }
+
+  /* ---------- page background ---------- */
+  /* 色のにじみ（固定） */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background:
+      radial-gradient(40vmax 40vmax at 8% 0%, var(--blob1), transparent 70%),
+      radial-gradient(36vmax 36vmax at 100% 18%, var(--blob2), transparent 70%),
+      radial-gradient(44vmax 44vmax at 70% 110%, var(--blob3), transparent 70%);
+  }
+  /* 細かいドット＋任意のパターン画像（images/bg-pattern.png があれば重ねる） */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      url("images/bg-pattern.png"),
+      radial-gradient(var(--dot) 1px, transparent 1.4px);
+    background-size: 512px 512px, 22px 22px;
+    opacity: var(--pattern-opacity);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.15) 100%);
+            mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.15) 100%);
+  }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
 
   /* ---------- hero ---------- */
@@ -92,15 +129,39 @@
   /* ---------- sections ---------- */
   .works-title { font-size: clamp(1.5rem, 4vw, 2rem); margin: 0 0 8px; }
   .works-sub { margin: 0 0 32px; color: var(--muted); }
-  section.group { margin-bottom: 56px; }
+  /* グループごとの色付きパネル */
+  section.group {
+    position: relative;
+    margin: 0 0 32px;
+    padding: 28px 16px 20px;
+    border-radius: 28px;
+    border: 1px solid color-mix(in srgb, var(--c1) 22%, var(--border));
+    background:
+      linear-gradient(135deg,
+        color-mix(in srgb, var(--c1) var(--panel-alpha), transparent),
+        color-mix(in srgb, var(--c2) calc(var(--panel-alpha) * .6), transparent));
+    overflow: hidden;
+    isolation: isolate;
+  }
+  @media (min-width: 640px) { section.group { padding: 36px 32px 32px; } }
+  /* 右上の大きな英字ラベル */
+  section.group::before {
+    content: attr(data-label);
+    position: absolute; right: -4px; top: -18px; z-index: -1;
+    font-size: clamp(3.5rem, 11vw, 7rem);
+    font-weight: 800; letter-spacing: -.03em; line-height: 1;
+    color: color-mix(in srgb, var(--c1) 12%, transparent);
+    white-space: nowrap; pointer-events: none;
+  }
   section.group h2 {
     display: flex; align-items: center; gap: 10px;
-    font-size: 1rem; font-weight: 700;
+    font-size: 1.125rem; font-weight: 700;
     margin: 0 0 20px;
   }
   section.group h2::before {
-    content: ""; width: 10px; height: 10px; border-radius: 3px;
+    content: ""; width: 12px; height: 12px; border-radius: 4px;
     background: linear-gradient(135deg, var(--c1), var(--c2));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--c1) 18%, transparent);
   }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
@@ -164,8 +225,23 @@
   .g-sheet    { --c1: #e8590c; --c2: #ae3ec9; }
   .g-discord  { --c1: #4c6ef5; --c2: #7950f2; }
 
-  footer { padding: 28px 0 56px; color: var(--muted); font-size: .875rem; border-top: 1px solid var(--border); }
+  .hero-visual-wrap { position: relative; }
+  .hero-visual-wrap::before {
+    content: ""; position: absolute; inset: -12% -8%; z-index: -1;
+    background: radial-gradient(closest-side, rgba(112,72,232,.35), transparent);
+    filter: blur(20px);
+  }
+
+  footer {
+    margin-top: 64px;
+    padding: 40px 0 56px;
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    font-size: .875rem;
+  }
+  footer a { color: #fff; }
   footer p { margin: 0 0 4px; }
+  footer .brand-foot { font-weight: 800; font-size: 1.125rem; color: #fff; margin-bottom: 8px; }
 </style>
 </head>
 <body>
@@ -192,8 +268,10 @@
         <a class="btn" href="https://github.com/shizaki-kanoto-lab">GitHub</a>
       </div>
     </div>
-    <div class="hero-visual">
-      <img src="images/hero.jpg" alt="" width="1600" height="1200" onerror="this.remove()">
+    <div class="hero-visual-wrap">
+      <div class="hero-visual">
+        <img src="images/hero.jpg" alt="" width="1600" height="1200" onerror="this.remove()">
+      </div>
     </div>
   </header>
 
@@ -201,7 +279,7 @@
     <h2 class="works-title">Works</h2>
     <p class="works-sub">用途ごとにまとめています。</p>
 
-    <section class="group g-schedule" aria-labelledby="sec-schedule">
+    <section class="group g-schedule" data-label="Schedule" aria-labelledby="sec-schedule">
       <h2 id="sec-schedule">日程調整</h2>
       <div class="grid">
         <article class="card">
@@ -239,7 +317,7 @@
       </div>
     </section>
 
-    <section class="group g-sheet" aria-labelledby="sec-sheet">
+    <section class="group g-sheet" data-label="Sheets" aria-labelledby="sec-sheet">
       <h2 id="sec-sheet">キャラクターシート</h2>
       <div class="grid">
         <article class="card">
@@ -277,7 +355,7 @@
       </div>
     </section>
 
-    <section class="group g-discord" aria-labelledby="sec-discord">
+    <section class="group g-discord" data-label="Discord" aria-labelledby="sec-discord">
       <h2 id="sec-discord">Discord</h2>
       <div class="grid">
         <article class="card">
@@ -299,10 +377,13 @@
     </section>
   </main>
 
-  <footer>
+</div>
+<footer>
+  <div class="wrap">
+    <p class="brand-foot">shizaki-kanoto-lab</p>
     <p>不具合・要望は各リポジトリの Issues か、X（<a href="https://x.com/shizaki_kanoto">@shizaki_kanoto</a>）までどうぞ。</p>
     <p><a href="https://github.com/shizaki-kanoto-lab">github.com/shizaki-kanoto-lab</a></p>
-  </footer>
-</div>
+  </div>
+</footer>
 </body>
 </html>
