@@ -911,9 +911,9 @@
 
     // --- 最下部でさらに下へ送ると先頭へ ---
     if (!pull) return;
-    var WHEEL_NEED = 360;   // 最下部に着いてから、さらにこれだけホイールを回したら戻る
-    var TOUCH_NEED = 110;   // スマホで最下部から指をこれだけ上へ引っぱったら戻る
-    var progress = 0, acc = 0, armed = false, lastWheel = 0, idle = 0, done = false;
+    var WHEEL_NEED = 200;   // 最下部に着いてから、さらにこれだけホイールを回したら戻る
+    var TOUCH_NEED = 64;    // スマホで最下部から指をこれだけ上へ引っぱったら戻る
+    var progress = 0, acc = 0, armed = false, lastWheel = 0, lastDelta = 0, idle = 0, done = false;
     var touchStart = null;
 
     function atBottom() {
@@ -940,11 +940,12 @@
 
     window.addEventListener('wheel', function (e) {
       var now = performance.now();
-      var gap = now - lastWheel;
-      lastWheel = now;
+      var gap = now - lastWheel, prev = lastDelta;
+      lastWheel = now; lastDelta = e.deltaY;
       if (e.deltaY <= 0 || !atBottom() || done) return;
-      // 最下部に着いた勢い（慣性スクロール）では数えない。いったん手を止めてから回した分だけ数える
-      if (!armed) { if (gap > 220) armed = true; else return; }
+      // 最下部に着いた勢い（慣性スクロール）では数えない。慣性は間隔が短く、量がだんだん減っていく。
+      // 少し間があいた操作か、前より強く送り始めた操作（新しくスワイプした）から数える
+      if (!armed) { if (gap > 120 || e.deltaY > prev * 1.5 + 2) armed = true; else return; }
       var d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
       acc += d;
       setP(acc / WHEEL_NEED);
