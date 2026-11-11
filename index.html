@@ -461,8 +461,32 @@
   }
   .to-top:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(112,72,232,.45), 0 2px 6px rgba(0,0,0,.2); }
   .to-top:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-  .js .to-top:not(.show) { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; }
+  .js .to-top:not(.show), .js .to-top.at-end { opacity: 0; transform: translateY(12px); pointer-events: none; visibility: hidden; }
   @media (min-width: 640px) { .to-top { right: 24px; bottom: 24px; } }
+
+  /* フッター最下部：さらに下へスクロール（スマホは引っぱる）と先頭へ戻る。押しても戻る */
+  .pull-top {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    margin: 36px auto 0; padding: 4px 8px;
+    background: none; border: 0; cursor: pointer;
+    color: var(--footer-text); font: 500 .8125rem/1.5 var(--font-body);
+  }
+  .pull-top .ring {
+    --p: 0;
+    position: relative; width: 52px; height: 52px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff;
+    background: conic-gradient(#d6589c calc(var(--p) * 1turn), rgba(255,255,255,.14) 0);
+    transition: transform .2s ease;
+  }
+  .pull-top .ring::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--footer-bg); }
+  .pull-top .ring svg { position: relative; }
+  .pull-top:hover .ring { transform: translateY(-2px); }
+  .pull-top.ready .ring { background: var(--grad); transform: scale(1.12); }
+  .pull-top.ready .ring::before { background: transparent; }
+  .pull-top:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 12px; }
+  .pull-top .t-touch { display: none; }
+  @media (hover: none) { .pull-top .t-touch { display: inline; } .pull-top .t-wheel { display: none; } }
+  footer { padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 24px)); }
 
   @media (prefers-reduced-motion: reduce) {
     *, .js .reveal { transition: none !important; }
@@ -650,6 +674,10 @@
     <p>不具合・要望は各リポジトリの Issues か、X（<a href="https://x.com/shizaki_kanoto">@shizaki_kanoto</a>）までどうぞ。</p>
     <p><a href="https://github.com/shizaki-kanoto-lab">github.com/shizaki-kanoto-lab</a></p>
     <p class="copyright"><small>&copy; 2026 隠れ家クロウラ</small></p>
+    <button type="button" class="pull-top" aria-label="ページの先頭へ戻る">
+      <span class="ring" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+      <span aria-hidden="true"><span class="t-wheel">さらに下へスクロールで先頭へ</span><span class="t-touch">もう少し引っぱると先頭へ</span></span>
+    </button>
   </div>
 </footer>
 
@@ -846,27 +874,97 @@
     });
   })();
 
-  // ページ上部へ戻るボタン：ヒーローを過ぎたら表示し、押したら先頭までスクロール
+  // ページ上部へ戻る：右下のボタン（フッターが見えたら隠す）と、最下部でさらに下へ送ると先頭へ戻る仕組み
   (function () {
     var btn = document.querySelector('.to-top');
-    if (!btn) return;
-    var ticking = false;
-    function update() {
-      ticking = false;
-      btn.classList.toggle('show', window.scrollY > Math.min(600, window.innerHeight * 0.8));
-    }
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
+    var pull = document.querySelector('.pull-top');
+    var ring = pull && pull.querySelector('.ring');
+    var footer = document.querySelector('footer');
+
+    function goTop() {
       // スクロールの滑らかさは CSS の scroll-behavior（動きを減らす設定なら即時）に任せる
       window.scrollTo({ top: 0 });
       // URL に #top を残さず、キーボード操作の起点もページ先頭に戻す
       var first = document.querySelector('.nav a');
       if (first) first.focus({ preventScroll: true });
-    });
+    }
+
+    // --- 右下のボタン ---
+    if (btn) {
+      var ticking = false;
+      function update() {
+        ticking = false;
+        btn.classList.toggle('show', window.scrollY > Math.min(600, window.innerHeight * 0.8));
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+      btn.addEventListener('click', function (e) { e.preventDefault(); goTop(); });
+      // フッターの中身に重ならないよう、フッターが見えている間は隠す（そこでは下の仕組みを使う）
+      if (footer && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (en) {
+          btn.classList.toggle('at-end', en[0].isIntersecting);
+        }).observe(footer);
+      }
+    }
+
+    // --- 最下部でさらに下へ送ると先頭へ ---
+    if (!pull) return;
+    var WHEEL_NEED = 360;   // 最下部に着いてから、さらにこれだけホイールを回したら戻る
+    var TOUCH_NEED = 110;   // スマホで最下部から指をこれだけ上へ引っぱったら戻る
+    var progress = 0, acc = 0, armed = false, lastWheel = 0, idle = 0, done = false;
+    var touchStart = null;
+
+    function atBottom() {
+      return Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 2;
+    }
+    function setP(p) {
+      progress = Math.max(0, Math.min(1, p));
+      ring.style.setProperty('--p', progress.toFixed(3));
+      pull.classList.toggle('ready', progress >= 1);
+    }
+    function fire() {
+      if (done) return;
+      done = true; acc = 0; setP(1);
+      goTop();
+      setTimeout(function () { setP(0); }, 600);
+    }
+
+    pull.addEventListener('click', goTop);
+
+    // 最下部から離れたらリセット
+    window.addEventListener('scroll', function () {
+      if (!atBottom()) { armed = false; done = false; acc = 0; if (progress) setP(0); }
+    }, { passive: true });
+
+    window.addEventListener('wheel', function (e) {
+      var now = performance.now();
+      var gap = now - lastWheel;
+      lastWheel = now;
+      if (e.deltaY <= 0 || !atBottom() || done) return;
+      // 最下部に着いた勢い（慣性スクロール）では数えない。いったん手を止めてから回した分だけ数える
+      if (!armed) { if (gap > 220) armed = true; else return; }
+      var d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+      acc += d;
+      setP(acc / WHEEL_NEED);
+      if (acc >= WHEEL_NEED) fire();
+      clearTimeout(idle);
+      idle = setTimeout(function () { if (!done) { acc = 0; setP(0); } }, 700);
+    }, { passive: true });
+
+    window.addEventListener('touchstart', function (e) {
+      touchStart = (atBottom() && !done && e.touches.length === 1) ? e.touches[0].clientY : null;
+    }, { passive: true });
+    window.addEventListener('touchmove', function (e) {
+      if (touchStart === null) return;
+      setP((touchStart - e.touches[0].clientY) / TOUCH_NEED);
+    }, { passive: true });
+    window.addEventListener('touchend', function () {
+      if (touchStart === null) return;
+      touchStart = null;
+      if (progress >= 1) fire(); else setP(0);
+    }, { passive: true });
   })();
 </script>
 </body>
