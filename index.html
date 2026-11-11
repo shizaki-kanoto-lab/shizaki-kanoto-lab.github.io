@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shizaki-kanoto-lab</title>
+<meta name="description" content="TRPG の日程調整・キャラクターシート管理・Discord 運営を楽にするために作ったツールのポートフォリオです。">
+<meta property="og:title" content="shizaki-kanoto-lab">
+<meta property="og:description" content="TRPG の日程調整・キャラクターシート管理・Discord 運営を楽にするために作ったツールのポートフォリオです。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shizaki-kanoto-lab.github.io/">
+<meta property="og:image" content="https://shizaki-kanoto-lab.github.io/images/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f5f4f0">
+<link rel="icon" href="images/logo-64.png" type="image/png">
+<link rel="apple-touch-icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Geist:wght@800&family=Outfit:wght@400;600;700;800&family=Klee+One:wght@600&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script>
+  document.documentElement.classList.add('js');
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f5f4f0;
+    --surface: rgba(255,255,255,.82);
+    --surface-solid: #ffffff;
+    --text: #15171c;
+    --muted: #5a606b;
+    --border: rgba(30,35,50,.10);
+    --accent: #7048e8;
+    --grad: linear-gradient(115deg, #7048e8 0%, #a85ca8 52%, #d6589c 100%);
+    --tag-bg: rgba(30,35,50,.05);
+    --shadow: 0 1px 2px rgba(20,20,30,.04), 0 10px 30px rgba(20,20,30,.06);
+    --shadow-hover: 0 2px 6px rgba(20,20,30,.06), 0 24px 56px rgba(80,40,100,.14);
+    --blob1: rgba(112,72,232,.18);
+    --blob2: rgba(168,92,168,.18);
+    --blob3: rgba(199,123,168,.14);
+    --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%233a2850' stroke-opacity='.09' stroke-width='1'/%3E%3C/svg%3E");
+    --pattern-opacity: 1;
+    --panel-alpha: 8%;
+    --nav-bg: rgba(245,244,240,.72);
+    --footer-bg: #160f1c;
+    --footer-text: #a3a9b3;
+    --font-display: "Outfit", "Noto Sans JP", system-ui, sans-serif;
+    --font-title: "Klee One", "Noto Sans JP", sans-serif;
+    --font-body: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+  }
+  /* ダーク：OS がダークで、手動でライトを選んでいないとき／手動でダークを選んだとき */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #130e18;
+      --surface: rgba(32,24,40,.78);
+      --surface-solid: #201828;
+      --text: #eceef2;
+      --muted: #9aa1ac;
+      --border: rgba(255,255,255,.08);
+      --accent: #c7a8ec;
+      --tag-bg: rgba(255,255,255,.06);
+      --shadow: 0 1px 2px rgba(0,0,0,.4);
+      --shadow-hover: 0 24px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(199,168,236,.25);
+      --blob1: rgba(112,72,232,.24);
+      --blob2: rgba(168,92,168,.20);
+      --blob3: rgba(199,123,168,.10);
+      --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%23ffffff' stroke-opacity='.06' stroke-width='1'/%3E%3C/svg%3E");
+      --pattern-opacity: .7;
+      --panel-alpha: 13%;
+      --nav-bg: rgba(19,14,24,.72);
+      --footer-bg: #0d0912;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #130e18;
+    --surface: rgba(32,24,40,.78);
+    --surface-solid: #201828;
+    --text: #eceef2;
+    --muted: #9aa1ac;
+    --border: rgba(255,255,255,.08);
+    --accent: #c7a8ec;
+    --tag-bg: rgba(255,255,255,.06);
+    --shadow: 0 1px 2px rgba(0,0,0,.4);
+    --shadow-hover: 0 24px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(199,168,236,.25);
+    --blob1: rgba(112,72,232,.24);
+    --blob2: rgba(168,92,168,.20);
+    --blob3: rgba(199,123,168,.10);
+    --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%23ffffff' stroke-opacity='.06' stroke-width='1'/%3E%3C/svg%3E");
+    --pattern-opacity: .7;
+    --panel-alpha: 13%;
+    --nav-bg: rgba(19,14,24,.72);
+    --footer-bg: #0d0912;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; position: relative; }
+  @media (min-width: 640px) { .wrap { padding: 0 24px; } }
+
+  /* ---------- page background ---------- */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background:
+      radial-gradient(40vmax 40vmax at 8% 0%, var(--blob1), transparent 70%),
+      radial-gradient(36vmax 36vmax at 100% 18%, var(--blob2), transparent 70%),
+      radial-gradient(44vmax 44vmax at 70% 110%, var(--blob3), transparent 70%);
+  }
+  /* 六角形の格子＋任意のパターン画像（images/bg-pattern.png があれば重ねる） */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("images/bg-pattern.png"), var(--hex);
+    background-size: 512px 512px, 28px 48.5px;
+    opacity: var(--pattern-opacity);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.15) 100%);
+            mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.15) 100%);
+  }
+
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--nav-bg);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+            backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .nav .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: var(--font-display); font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+  .nav .logo .mark {
+    width: 28px; height: 28px; flex: none; border-radius: 8px; background: var(--grad);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M14 1.5L25 7.75V20.25L14 26.5L3 20.25V7.75Z'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M14 1.5L25 7.75V20.25L14 26.5L3 20.25V7.75Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+  .nav .logo img { width: 32px; height: 32px; display: block; }
+  .nav .logo img + .mark { display: none; }
+  .nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { display: block; padding: 6px 12px; border-radius: 8px; text-decoration: none; color: var(--muted); font-family: var(--font-display); font-weight: 600; font-size: .9375rem; }
+  .nav ul a:hover { color: var(--text); background: var(--tag-bg); }
+  .nav .right { display: flex; align-items: center; gap: 4px; }
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; margin-left: 4px; padding: 0;
+    border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); cursor: pointer;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .theme-toggle:hover { border-color: var(--accent); }
+  .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .moon { display: none; }
+  @media (max-width: 480px) { .nav .logo span.name { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero {
+    display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;
+    padding: 56px 0 72px;
+  }
+  @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 1fr; gap: 56px; padding: 96px 0 112px; } }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 14px 5px 6px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--border);
+    font-family: var(--font-display); font-size: .8125rem; font-weight: 600; color: var(--muted);
+    box-shadow: var(--shadow);
+  }
+  .pill b { background: var(--grad); color: #fff; padding: 1px 10px; border-radius: 999px; font-weight: 700; letter-spacing: .04em; }
+  .hero h1 {
+    margin: 22px 0 20px;
+    font-family: var(--font-body);
+    font-weight: 900;
+    font-size: clamp(1.875rem, 8.6vw, 3.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+  }
+  .hero h1 .line { display: block; white-space: nowrap; }
+  .hero p.lead { margin: 0; color: var(--muted); font-size: 1.0625rem; max-width: 32em; }
+  .stats { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .stats li { font-size: .8125rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 3px 12px; font-family: var(--font-display); font-weight: 600; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+  /* hero visual：画像がなければ作品カードを重ねた図を表示 */
+  .hero-visual-wrap { position: relative; }
+  .hero-visual-wrap::before {
+    content: ""; position: absolute; inset: -14% -10%; z-index: -1;
+    background: radial-gradient(closest-side, rgba(150,80,200,.38), transparent);
+    filter: blur(24px);
+  }
+  .hero-visual {
+    position: relative; aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden;
+    background: linear-gradient(145deg, #1d1430 0%, #2c1840 55%, #3e1636 100%);
+    box-shadow: var(--shadow-hover);
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .hero-visual::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%23ffffff' stroke-opacity='.08' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 28px 48.5px;
+    -webkit-mask-image: radial-gradient(circle at 50% 45%, #000 20%, transparent 75%);
+            mask-image: radial-gradient(circle at 50% 45%, #000 20%, transparent 75%);
+  }
+  .stack { position: absolute; inset: 0; }
+  .stack .w {
+    position: absolute; width: 52%; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  }
+  .stack .w i { display: block; height: 58%; }
+  .stack .w span { display: block; padding: 8px 12px; font-family: var(--font-display); font-weight: 700; font-size: clamp(.625rem, 1.6vw, .8125rem); color: rgba(255,255,255,.9); letter-spacing: .06em; text-transform: uppercase; }
+  .stack .w1 { left: 6%;  top: 12%; transform: rotate(-7deg); }
+  .stack .w2 { left: 26%; top: 30%; transform: rotate(2deg); z-index: 2; }
+  .stack .w3 { left: 44%; top: 10%; transform: rotate(8deg); }
+  .stack .w1 i { background: linear-gradient(135deg, #1c7ed6, #0ca678); }
+  .stack .w2 i { background: linear-gradient(135deg, #e8590c, #ae3ec9); }
+  .stack .w3 i { background: linear-gradient(135deg, #4c6ef5, #7950f2); }
+  .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 3; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-display); font-size: .9375rem; font-weight: 600;
+    text-decoration: none;
+    padding: 9px 18px; border-radius: 12px;
+    border: 1px solid var(--border);
+    color: var(--text); background: var(--surface);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn.solid { background: var(--grad); color: #fff; border-color: transparent; box-shadow: 0 8px 24px rgba(168,92,168,.35); }
+  .btn.solid:hover { box-shadow: 0 12px 32px rgba(168,92,168,.45); }
+  .btn.sm { font-size: .8125rem; padding: 6px 14px; border-radius: 10px; }
+  .btn .arr { transition: transform .15s ease; }
+  .btn:hover .arr { transform: translateX(2px); }
+  .btn:hover .arr.ext { transform: translate(2px,-2px); }
+
+  /* ---------- works ---------- */
+  .works-head { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; margin: 0 0 28px; }
+  .works-head h2 { margin: 0; font-family: "Geist", var(--font-display); font-weight: 800; font-size: clamp(2.25rem, 6vw, 3.5rem); letter-spacing: -.03em; line-height: 1; }
+  .works-head p { margin: 0; color: var(--muted); }
+
+  section.group {
+    position: relative;
+    margin: 0 0 28px;
+    padding: 28px 16px 20px;
+    border-radius: 28px;
+    border: 1px solid color-mix(in srgb, var(--c1) 22%, var(--border));
+    background:
+      linear-gradient(135deg,
+        color-mix(in srgb, var(--c1) var(--panel-alpha), transparent),
+        color-mix(in srgb, var(--c2) calc(var(--panel-alpha) * .6), transparent));
+    overflow: hidden;
+    isolation: isolate;
+  }
+  @media (min-width: 640px) { section.group { padding: 36px 32px 32px; } }
+  section.group::before {
+    content: attr(data-label);
+    position: absolute; right: -4px; top: -20px; z-index: -1;
+    font-family: var(--font-display);
+    font-size: clamp(3.75rem, 12vw, 8rem);
+    font-weight: 800; letter-spacing: -.04em; line-height: 1;
+    color: color-mix(in srgb, var(--c1) 11%, transparent);
+    white-space: nowrap; pointer-events: none;
+  }
+  .group-head { display: flex; align-items: baseline; gap: 14px; margin: 0 0 22px; }
+  .group-head .no {
+    font-family: var(--font-display); font-weight: 800; font-size: 1.75rem; line-height: 1; letter-spacing: -.02em;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .group-head h3 { margin: 0; font-size: 1.25rem; font-weight: 900; }
+  .group-head .en { font-family: var(--font-display); font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  @media (max-width: 380px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+    transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .thumb {
+    position: relative; aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .thumb::before { /* プレースホルダーにも六角形 */
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%23ffffff' stroke-opacity='.18' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 28px 48.5px;
+    -webkit-mask-image: linear-gradient(160deg, #000, transparent 80%);
+            mask-image: linear-gradient(160deg, #000, transparent 80%);
+  }
+  .thumb .ph {
+    position: relative;
+    color: #fff; font-family: var(--font-title); font-weight: 600; font-size: 1.5rem; word-break: auto-phrase; -webkit-text-stroke: .5px currentColor;
+    text-align: center; padding: 0 24px; line-height: 1.4;
+    text-shadow: 0 2px 12px rgba(0,0,0,.18);
+  }
+  .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .card:hover .thumb img { transform: scale(1.04); }
+
+  .card .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .card h4 { margin: 0 0 2px; font-family: var(--font-title); font-size: 1.25rem; font-weight: 600; line-height: 1.45; word-break: auto-phrase; -webkit-text-stroke: .5px currentColor; }
+  .card .repo { margin: 0 0 12px; font-size: .8125rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+  .card p.desc { margin: 0 0 16px; font-size: .9375rem; flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+  .tags li { background: var(--tag-bg); color: var(--muted); font-size: .75rem; padding: 2px 10px; border-radius: 999px; font-family: var(--font-display); font-weight: 600; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .links .btn.go { background: color-mix(in srgb, var(--c1) 14%, var(--surface-solid)); color: color-mix(in srgb, var(--c1) 80%, var(--text)); border-color: transparent; }
+
+  .g-schedule { --c1: #1c7ed6; --c2: #0ca678; }
+  .g-sheet    { --c1: #e8590c; --c2: #ae3ec9; }
+  .g-discord  { --c1: #4c6ef5; --c2: #7950f2; }
+
+  /* ---------- reveal ---------- */
+  .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- footer ---------- */
+  footer { margin-top: 80px; padding: 56px 0 40px; background: var(--footer-bg); color: var(--footer-text); font-size: .875rem; position: relative; overflow: hidden; }
+  footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--grad); }
+  footer a { color: #fff; }
+  footer p { margin: 0 0 4px; }
+  footer .wordmark {
+    font-family: "Audiowide", var(--font-display); font-weight: 400; letter-spacing: 0; line-height: 1.1;
+    font-size: clamp(1.125rem, 5.8vw, 4.25rem); margin: 0 0 28px; padding-bottom: .04em;
+    background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    overflow-wrap: anywhere;
+  }
+  footer .wrap { position: relative; z-index: 1; }
+  footer::after { /* 右下に大きなロゴを透かしで */
+    content: ""; position: absolute; right: -60px; bottom: -80px; width: 360px; height: 360px;
+    background: url("images/logo-mono.png") center / contain no-repeat;
+    opacity: .06; pointer-events: none;
+  }
+  .foot-brand { display: flex; align-items: center; gap: clamp(12px, 2.4vw, 24px); margin: 0 0 28px; }
+  .foot-brand img { width: clamp(44px, 9vw, 96px); height: auto; flex: none; display: block; }
+  .foot-brand .wordmark { margin: 0; min-width: 0; font-size: clamp(1rem, 4.4vw, 3.5rem); }
+  footer .copyright { margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); font-size: .8125rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, .js .reveal { transition: none !important; }
+    .js .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="サイト">
+  <div class="wrap">
+    <a class="logo" href="#top">
+      <img src="images/logo-64.png" alt="" width="32" height="32" onerror="this.remove()">
+      <span class="mark" aria-hidden="true"></span>
+      <span class="name">shizaki-kanoto-lab</span>
+    </a>
+    <div class="right">
+      <ul>
+        <li><a href="#works">Works</a></li>
+        <li><a href="https://github.com/shizaki-kanoto-lab">GitHub</a></li>
+        <li><a href="https://x.com/shizaki_kanoto">X</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="ダークモードに切り替える">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <span class="pill"><b>Portfolio</b>TRPG Tools by shizaki-kanoto-lab</span>
+      <h1>
+        <span class="line">TRPG の面倒を、</span>
+        <span class="line"><span class="grad-text">ツールで</span>片づける。</span>
+      </h1>
+      <p class="lead">遊ぶ中で「ここが面倒だな」と思ったところを、自分で作って解決してきたツールの置き場です。日程調整、キャラクターシートの管理、Discord サーバーの運営まわりのものを公開しています。</p>
+      <ul class="stats" aria-label="使っている技術">
+        <li>5 Works</li>
+        <li>Google Apps Script</li>
+        <li>Notion API</li>
+        <li>Discord Bot</li>
+        <li>Chrome 拡張</li>
+        <li>Cloudflare Workers</li>
+        <li>Python</li>
+      </ul>
+      <div class="cta">
+        <a class="btn solid" href="#works">作品を見る <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn" href="https://github.com/shizaki-kanoto-lab">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="hero-visual-wrap">
+      <div class="hero-visual">
+        <div class="stack" aria-hidden="true">
+          <div class="w w1"><i></i><span>Schedule</span></div>
+          <div class="w w3"><i></i><span>Discord</span></div>
+          <div class="w w2"><i></i><span>Sheets</span></div>
+        </div>
+        <img src="images/hero.jpg" alt="" width="1600" height="1200" onerror="this.remove()">
+      </div>
+    </div>
+  </header>
+
+  <main id="works">
+    <div class="works-head reveal">
+      <h2 class="grad-text">Works</h2>
+      <p>用途ごとにまとめています。</p>
+    </div>
+
+    <section class="group g-schedule reveal" data-label="Schedule" aria-labelledby="sec-schedule">
+      <div class="group-head"><span class="no">01</span><h3 id="sec-schedule">日程調整</h3><span class="en">Schedule</span></div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">
+            <span class="ph">空き日程抽出ツール</span>
+            <img src="images/works/proposed_date_tool.jpg" alt="空き日程抽出ツールの画面" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h4>空き日程抽出ツール</h4>
+            <p class="repo">proposed_date_tool</p>
+            <p class="desc">Google カレンダーの予定から、昼か夜のどちらかが空いている日を抜き出し、日程調整ツールにそのまま貼れる形で一覧にします。ブラウザで開いて Google でログインするだけで使えます。</p>
+            <ul class="tags"><li>Web</li><li>Google Apps Script</li><li>Google カレンダー</li></ul>
+            <div class="links">
+              <a class="btn sm go" href="https://shizaki-kanoto-lab.github.io/proposed_date_tool/">使ってみる <span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/proposed_date_tool">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <span class="ph">空き枠をNotionに追加するツール</span>
+            <img src="images/works/trpg_availability2notion.jpg" alt="Notion の空き枠表と Discord への通知" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h4>空き枠をNotionに追加するツール</h4>
+            <p class="repo">trpg_availability2notion</p>
+            <p class="desc">カレンダーから朝・昼・夜の空き枠を判定し、確認してから Notion の空き枠表に登録します。登録したら Discord に「◯月まで最新化しました」と通知します。</p>
+            <ul class="tags"><li>Google Apps Script</li><li>Notion</li><li>Discord</li></ul>
+            <div class="links">
+              <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/trpg_availability2notion">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="group g-sheet reveal" data-label="Sheets" aria-labelledby="sec-sheet">
+      <div class="group-head"><span class="no">02</span><h3 id="sec-sheet">キャラクターシート</h3><span class="en">Sheets</span></div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">
+            <span class="ph">キャラクターシート帳</span>
+            <img src="images/works/trpg_charsheet_book.jpg" alt="キャラクターシート帳の画面。左にタグで絞り込めるキャラクター一覧、上に検索と表示切り替えがある" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h4>キャラクターシート帳</h4>
+            <p class="repo">trpg_charsheet_book</p>
+            <p class="desc">各サイトのキャラクターシートを Chrome 拡張で Notion に集め、システム・タグ・技能値で絞り込める一覧ページにします。300枚以上のシートを管理しています（閲覧ページは非公開）。</p>
+            <ul class="tags"><li>Chrome 拡張</li><li>Notion</li><li>GitHub Actions</li></ul>
+            <div class="links">
+              <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <span class="ph">ケダモノオペラCSコピー</span>
+            <img src="images/works/kedamono-cs-copy.jpg" alt="Notion のキャラクターシート表と、Discord に貼り付けたキャラクターシート" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h4>ケダモノオペラCSコピー</h4>
+            <p class="repo">kedamono-cs-copy</p>
+            <p class="desc">『ケダモノオペラ』のキャラクターシートを Notion で管理し、ボタンひとつで Discord に貼れる形にコピーします。ファンが作った非公式ツールです。</p>
+            <ul class="tags"><li>Notion</li><li>Discord</li></ul>
+            <div class="links">
+              <a class="btn sm go" href="https://shizaki-kanoto-lab.github.io/kedamono-cs-copy/">使ってみる <span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/kedamono-cs-copy">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="group g-discord reveal" data-label="Discord" aria-labelledby="sec-discord">
+      <div class="group-head"><span class="no">03</span><h3 id="sec-discord">Discord</h3><span class="en">Server Ops</span></div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">
+            <span class="ph">チャンネル一括削除</span>
+            <img src="images/works/purge_discord_channels.jpg" alt="Discord で /purge コマンドを実行し、削除対象の一覧を確認している画面" width="1600" height="1000" loading="lazy" onerror="this.remove()">
+          </div>
+          <div class="body">
+            <h4>チャンネル一括削除</h4>
+            <p class="repo">purge_discord_channels</p>
+            <p class="desc">Discord の特定カテゴリにあるテキストチャンネルを、削除前に一覧で確認してからまとめて削除します。Discord 上の <code>/purge</code> コマンドでも、手元の PC からでも使えます。</p>
+            <ul class="tags"><li>Cloudflare Workers</li><li>Python</li><li>MIT</li></ul>
+            <div class="links">
+              <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/purge_discord_channels">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">
+      <img src="images/logo.png" alt="" width="96" height="96" loading="lazy">
+      <p class="wordmark">shizaki-kanoto-lab</p>
+    </div>
+    <p>不具合・要望は各リポジトリの Issues か、X（<a href="https://x.com/shizaki_kanoto">@shizaki_kanoto</a>）までどうぞ。</p>
+    <p><a href="https://github.com/shizaki-kanoto-lab">github.com/shizaki-kanoto-lab</a></p>
+    <p class="copyright"><small>&copy; 2026 隠れ家クロウラ</small></p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.querySelector('.theme-toggle');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    function saved() { try { return localStorage.getItem('theme'); } catch (e) { return null; } }
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      meta.setAttribute('content', theme === 'dark' ? '#130e18' : '#f5f4f0');
+      btn.setAttribute('aria-label', theme === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
+    }
+    apply(saved() || (mq.matches ? 'dark' : 'light'));
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      apply(next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    // 手動で選んでいない間は OS の設定に合わせる
+    mq.addEventListener('change', function (e) { if (!saved()) apply(e.matches ? 'dark' : 'light'); });
+  })();
+
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+</body>
+</html>
