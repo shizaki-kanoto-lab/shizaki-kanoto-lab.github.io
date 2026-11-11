@@ -228,9 +228,11 @@
   }
   .stack .w i { display: block; height: 58%; }
   .stack .w span { display: block; padding: 8px 12px; font-family: var(--font-display); font-weight: 700; font-size: clamp(.625rem, 1.6vw, .8125rem); color: rgba(255,255,255,.9); letter-spacing: .06em; text-transform: uppercase; }
-  .stack .w1 { left: 6%;  top: 12%; transform: rotate(-7deg); }
-  .stack .w2 { left: 26%; top: 30%; transform: rotate(2deg); z-index: 2; }
-  .stack .w3 { left: 44%; top: 10%; transform: rotate(8deg); }
+  /* 3枚の重なり全体が枠の上下中央に来るよう、上下の余白をそろえる */
+  .stack .w1 { left: 6%;  top: 21%; transform: rotate(-7deg); }
+  .stack .w2 { left: 26%; top: 38%; transform: rotate(2deg); z-index: 2; }
+  .stack .w3 { left: 44%; top: 19%; transform: rotate(8deg); }
+  .stack .w3 span { text-align: right; } /* 左側は Sheets に隠れるので右寄せ */
   .stack .w1 i { background: linear-gradient(135deg, #1c7ed6, #0ca678); }
   .stack .w2 i { background: linear-gradient(135deg, #e8590c, #ae3ec9); }
   .stack .w3 i { background: linear-gradient(135deg, #4c6ef5, #7950f2); }
@@ -484,7 +486,7 @@
           <div class="w w3"><i></i><span>Discord</span></div>
           <div class="w w2"><i></i><span>Sheets</span></div>
         </div>
-        <img src="images/hero.jpg" alt="" width="1600" height="1200" onerror="this.remove()">
+        <img src="images/hero.jpg" alt="" width="1448" height="1086" onerror="this.remove()">
       </div>
     </div>
   </header>
@@ -511,6 +513,7 @@
             <ul class="tags"><li>Web</li><li>Google Apps Script</li><li>Google カレンダー</li></ul>
             <div class="links">
               <a class="btn sm go" href="https://shizaki-kanoto-lab.github.io/proposed_date_tool/">使ってみる <span class="arr" aria-hidden="true">→</span></a>
+              <a class="btn sm" href="https://note.com/shizaki_kanoto/n/n2e130a60c4db">note <span class="arr ext" aria-hidden="true">↗</span></a>
               <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/proposed_date_tool">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
             </div>
           </div>
@@ -591,6 +594,7 @@
             <p class="desc">Discord の特定カテゴリにあるテキストチャンネルを、削除前に一覧で確認してからまとめて削除します。Discord 上の <code>/purge</code> コマンドでも、手元の PC からでも使えます。</p>
             <ul class="tags"><li>Cloudflare Workers</li><li>Python</li><li>MIT</li></ul>
             <div class="links">
+              <a class="btn sm" href="https://note.com/shizaki_kanoto/n/nb6ff0b289278">note <span class="arr ext" aria-hidden="true">↗</span></a>
               <a class="btn sm" href="https://github.com/shizaki-kanoto-lab/purge_discord_channels">GitHub <span class="arr ext" aria-hidden="true">↗</span></a>
             </div>
           </div>
