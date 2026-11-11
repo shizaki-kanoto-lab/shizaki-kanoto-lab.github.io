@@ -28,7 +28,7 @@
     --blob1: rgba(76,110,245,.20);
     --blob2: rgba(174,62,201,.14);
     --blob3: rgba(12,166,120,.14);
-    --dot: transparent;
+    --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%23283250' stroke-opacity='.09' stroke-width='1'/%3E%3C/svg%3E");
     --pattern-opacity: 1;
     --panel-alpha: 9%;
     --footer-bg: #1d2026;
@@ -49,7 +49,7 @@
       --blob1: rgba(76,110,245,.22);
       --blob2: rgba(174,62,201,.16);
       --blob3: rgba(12,166,120,.12);
-      --dot: rgba(255,255,255,.07);
+      --hex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0L28 8.08V24.25L14 32.33L0 24.25V8.08Z M14 32.33V48.5' fill='none' stroke='%23ffffff' stroke-opacity='.06' stroke-width='1'/%3E%3C/svg%3E");
       --pattern-opacity: .6;
       --panel-alpha: 14%;
       --footer-bg: #0d0f12;
@@ -78,13 +78,13 @@
       radial-gradient(36vmax 36vmax at 100% 18%, var(--blob2), transparent 70%),
       radial-gradient(44vmax 44vmax at 70% 110%, var(--blob3), transparent 70%);
   }
-  /* 細かいドット＋任意のパターン画像（images/bg-pattern.png があれば重ねる） */
+  /* 六角形の格子＋任意のパターン画像（images/bg-pattern.png があれば重ねる） */
   body::after {
     content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background-image:
       url("images/bg-pattern.png"),
-      radial-gradient(var(--dot) 1px, transparent 1.4px);
-    background-size: 512px 512px, 22px 22px;
+      var(--hex);
+    background-size: 512px 512px, 28px 48.5px;
     opacity: var(--pattern-opacity);
     -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.15) 100%);
             mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.15) 100%);
