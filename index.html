@@ -305,7 +305,8 @@
     border-radius: 18px;
     overflow: hidden;
     box-shadow: var(--shadow);
-    display: flex; flex-direction: column;
+    /* 同じ行のカードで、説明・タグ・ボタンの高さをそろえる（subgrid） */
+    display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0;
     transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
   }
   .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
@@ -410,14 +411,15 @@
     @keyframes lb-prev { from { opacity: 0; transform: translateX(-32px); } }
   }
 
-  .card .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .card .body { padding: 20px 22px 22px; display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
   .card h4 { margin: 0 0 2px; font-family: var(--font-title); font-size: 1.25rem; font-weight: 600; line-height: 1.45; word-break: auto-phrase; -webkit-text-stroke: .5px currentColor; }
   .card h4 .nb { display: inline-block; }
+  .card h4 { align-self: end; } /* 題名の行数が違っても、リポジトリ名をすぐ下に置く */
   .card .repo { margin: 0 0 12px; font-size: .8125rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
-  .card p.desc { margin: 0 0 16px; font-size: .9375rem; flex: 1; }
+  .card p.desc { margin: 0 0 16px; font-size: .9375rem; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
   .tags li { background: var(--tag-bg); color: var(--muted); font-size: .75rem; padding: 2px 10px; border-radius: 999px; font-family: var(--font-display); font-weight: 600; }
-  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .links { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 8px; }
   .links .btn.go { background: color-mix(in srgb, var(--c1) 14%, var(--surface-solid)); color: color-mix(in srgb, var(--c1) 80%, var(--text)); border-color: transparent; }
 
   .g-schedule { --c1: #1c7ed6; --c2: #0ca678; }
