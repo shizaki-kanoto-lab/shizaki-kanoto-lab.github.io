@@ -106,6 +106,9 @@
     .chips li { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 3px 14px; font-size: .92rem; }
     .small { font-size: .9rem; color: var(--muted); margin: 6px 0 0; }
 
+    .shot { margin: 0 auto; max-width: 380px; }
+    .shot img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 14px 34px -22px rgba(0, 0, 0, .55); }
+    .shot figcaption { margin-top: 10px; font-size: .9rem; color: var(--muted); }
     ul.check { list-style: none; padding: 0; margin: 0; }
     ul.check li { padding-left: 1.6em; position: relative; margin: 6px 0; }
     ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-ink); font-weight: 700; }
@@ -194,6 +197,16 @@
             <p>GitHub Actions が3時間ごとに Notion を読み、システム・タグ・技能値で絞り込める一覧ページを作り直します。</p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>実際の画面</h2>
+        <figure class="shot">
+          <img src="screen.png" alt="拡張機能「シート帳へ送る」のポップアップ。キャラッシュのエモクロアTRPGのシートで、ステータス3件・能力値8件・技能17件・チャットパレットありと読み取れたこと、キャラクター名、「追加済み：シナリオを更新」のボタン、全42人のうち新規0人・追加済み42人と出ている" width="408" height="493" loading="lazy">
+          <figcaption>キャラッシュでシートを開いて、拡張機能のアイコンを押したところ。読み取れた項目と、Notion に追加済みかどうかが出ます。シートの URL はぼかしています。</figcaption>
+        </figure>
       </div>
     </section>
 
