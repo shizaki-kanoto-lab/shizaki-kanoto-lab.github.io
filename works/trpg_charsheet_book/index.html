@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>キャラクターシート帳</title>
+  <meta name="description" content="各サイトのTRPGキャラクターシートをChrome拡張でNotionに集め、システム・タグ・技能値で絞り込める一覧ページにするツールです。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="キャラクターシート帳">
+  <meta property="og:description" content="いあきゃら・キャラッシュなど各サイトのキャラクターシートを、Chrome拡張でNotionに集めて一覧にします。">
+  <meta property="og:url" content="https://shizaki-kanoto.is-a.dev/works/trpg_charsheet_book/">
+  <meta property="og:image" content="https://shizaki-kanoto.is-a.dev/works/trpg_charsheet_book/ogp.jpg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #f5f0e6;
+      --surface: #fffdf7;
+      --text: #1d2a28;
+      --muted: #56625f;
+      --border: #e2dac9;
+      --primary: #244b4a;   /* ボタン・リンク（白文字が読める濃さの深緑） */
+      --primary-text: #fffdf7;
+      --teal: #3f7a73;      /* 線や飾り */
+      --accent: #b77a50;    /* 線や飾り（銅） */
+      --accent-ink: #9a6036; /* チェックマーク（背景上で見える濃さの銅） */
+      --tip-bg: #ece3d0;
+      --note-bg: #e3ece8;
+      --serif: Georgia, "Times New Roman", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111917;
+        --surface: #18221f;
+        --text: #ece7dc;
+        --muted: #a9b5ae;
+        --border: #2a3632;
+        --primary: #b2c6bb;
+        --primary-text: #111917;
+        --teal: #7fb0a5;
+        --accent: #d69b6e;
+        --accent-ink: #d69b6e;
+        --tip-bg: #232b25;
+        --note-bg: #1c2a26;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+      line-height: 1.8;
+    }
+    a { color: var(--primary); }
+    code { font-size: .92em; padding: 1px 6px; border-radius: 6px; background: var(--tip-bg); }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+    header.hero { padding: 56px 0 36px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; align-items: center; }
+    .hero .en { font-family: var(--serif); font-size: .78rem; letter-spacing: .3em; color: var(--accent-ink); text-transform: uppercase; margin: 0 0 6px; }
+    .hero h1 { font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.35; margin: 0 0 14px; letter-spacing: .06em; }
+    .hero .lead { font-size: 1.08rem; color: var(--muted); margin: 0; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn { display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; border: 2px solid var(--primary); }
+    .btn.primary { background: var(--primary); color: var(--primary-text); }
+    .btn.secondary { color: var(--primary); }
+    .hero figure { margin: 0; }
+    .hero figure img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 18px 40px -22px rgba(17, 25, 23, .7); }
+
+    section { padding: 36px 0; border-top: 1px solid var(--border); }
+    h2 { font-size: 1.45rem; margin: 0 0 18px; letter-spacing: .04em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+    .card h3 { font-size: 1.05rem; margin: 0 0 6px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .flow { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; counter-reset: step; }
+    .flow li { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; counter-increment: step; }
+    .flow li::before { content: counter(step); display: inline-grid; place-items: center; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: #fffdf7; font-weight: 700; font-size: .85rem; margin-bottom: 6px; font-family: var(--serif); }
+    .flow h3 { font-size: 1rem; margin: 0 0 4px; }
+    .flow p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0 0 8px; }
+    .chips li { background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 3px 14px; font-size: .92rem; }
+    .small { font-size: .9rem; color: var(--muted); margin: 6px 0 0; }
+
+    ul.check { list-style: none; padding: 0; margin: 0; }
+    ul.check li { padding-left: 1.6em; position: relative; margin: 6px 0; }
+    ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-ink); font-weight: 700; }
+
+    .tip { background: var(--tip-bg); border-radius: 12px; padding: 14px 18px; margin-top: 18px; }
+    .notice { background: var(--note-bg); border-left: 4px solid var(--teal); border-radius: 12px; padding: 16px 20px; }
+    .notice p { margin: 0; }
+    .notice p + p { margin-top: 8px; }
+
+    /* フッター（https://shizaki-kanoto.is-a.dev/kedamono-cs-copy/ に合わせる） */
+    footer {
+      position: relative; margin-top: 40px; padding: 24px 0 max(32px, env(safe-area-inset-bottom));
+      text-align: center; font-size: .8rem; line-height: 1.8; color: var(--muted);
+    }
+    footer::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--teal), var(--accent), transparent);
+      opacity: .7;
+    }
+    footer p { margin: 0 0 8px; }
+    footer .copyright { margin: 28px 0 0; font-size: .75rem; letter-spacing: .05em; }
+    footer .foot-logo { display: inline-block; margin-top: 12px; opacity: .85; transition: opacity .2s; }
+    footer .foot-logo:hover { opacity: 1; }
+    footer .foot-logo img { display: block; width: 48px; height: 48px; }
+
+    @media (max-width: 720px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .grid.two { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="en">Character Sheet Archive</p>
+        <h1>キャラクターシート帳</h1>
+        <p class="lead">いあきゃら・キャラッシュなど、あちこちのサイトにあるキャラクターシートを Chrome 拡張で Notion に集め、システム・タグ・技能値で絞り込める一覧ページにします。300枚以上のシートをこれで管理しています。</p>
+        <div class="buttons">
+          <a class="btn primary" href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book/blob/main/extension/README.md">拡張機能の使い方</a>
+          <a class="btn secondary" href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book">GitHub で見る</a>
+        </div>
+      </div>
+      <figure>
+        <img src="../../images/works/trpg_charsheet_book-image.jpg" alt="キャラクターシート帳のイメージ。Chrome 拡張の「シート帳へ送る」から Notion のデータベースに集まり、ノートパソコンとスマホの一覧ページに表示される" width="1600" height="900">
+      </figure>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>しくみ</h2>
+        <ol class="flow">
+          <li>
+            <h3>拡張機能で送る</h3>
+            <p>シートのサイトで「シート帳へ送る」を押すと、能力値・技能・チャットパレットなどを読み取って Notion に追加します。マイページから新しいキャラだけをまとめて送ることもできます。</p>
+          </li>
+          <li>
+            <h3>Notion で管理する</h3>
+            <p>シートは Notion のデータベースに1キャラ1ページで入ります。HP やメモ、通過したシナリオは Notion で書き足します。</p>
+          </li>
+          <li>
+            <h3>一覧ページで探す</h3>
+            <p>GitHub Actions が3時間ごとに Notion を読み、システム・タグ・技能値で絞り込める一覧ページを作り直します。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>できること</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>技能値で探す</h3>
+            <p>「目星70以上」「図書館>=60 6版」のように、技能の値でキャラを絞り込めます。</p>
+          </div>
+          <div class="card">
+            <h3>システムとタグで分ける</h3>
+            <p>クトゥルフ神話TRPG 6版・7版、エモクロア、ケダモノオペラなど、システムごとに切り替えられます。</p>
+          </div>
+          <div class="card">
+            <h3>通過シナリオを記録</h3>
+            <p>元のシートにある通過シナリオや HO を拾って、Notion に書き足します。シナリオ別の一覧も見られます。</p>
+          </div>
+          <div class="card">
+            <h3>生存とロストを分ける</h3>
+            <p>ロストしたキャラは分けて表示します。同じ名前のキャラを1人にまとめることもできます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>読み取れるサイト</h2>
+        <ul class="chips">
+          <li>いあきゃら</li>
+          <li>キャラッシュ</li>
+          <li>vinsanet</li>
+          <li>ゆとシート</li>
+          <li>キャラクター保管所</li>
+          <li>キャラクターシート倉庫</li>
+          <li>フタリソウサのスプレッドシート</li>
+        </ul>
+        <p class="small">サイトとシステムによって、読み取れる項目は違います。詳しくは拡張機能の README にまとめています。</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>閲覧ページは非公開です</h2>
+        <div class="notice">
+          <p>一覧ページにはキャラクターの立ち絵が並びます。立ち絵は描いてくださった方の作品なので、著作権に配慮して閲覧ページは公開していません。</p>
+          <p>このページと GitHub では、しくみと拡張機能のコードを公開しています。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>安全性について</h2>
+        <ul class="check">
+          <li>Notion のトークンは、拡張機能を入れた Chrome の中にだけ保存します。作者を含め、ほかの人には送られません。</li>
+          <li>拡張機能が直接やりとりする外部のサービスは Notion だけです。</li>
+          <li>ログインが必要なサイトでは、そのサイトのページの中で、いつも表示に使っている仕組みのまま読み取ります。ログイン情報を拡張機能や Notion に渡すことはありません。</li>
+        </ul>
+        <div class="tip">拡張機能は Chrome ウェブストアには出していません。使うときは GitHub からダウンロードして、Chrome の「パッケージ化されていない拡張機能を読み込む」で入れます。</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>質問・不具合の報告</h2>
+        <p>分かりにくいところや動かないところがあれば、<a href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book/issues">GitHub の Issue</a> で気軽に教えてください。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>不具合・要望は、<a href="https://github.com/shizaki-kanoto-lab/trpg_charsheet_book/issues" target="_blank" rel="noopener">Issues</a> か X（<a href="https://x.com/shizaki_kanoto" target="_blank" rel="noopener">@shizaki_kanoto</a>）までどうぞ。</p>
+      <p class="copyright"><small>&copy; 2026 隠れ家クロウラ</small></p>
+      <a class="foot-logo" href="https://shizaki-kanoto.is-a.dev/" title="他のツールはこちら" aria-label="他のツールはこちら"><img src="../../images/logo.png" alt="" width="48" height="48" loading="lazy"></a>
+    </div>
+  </footer>
+</body>
+</html>
