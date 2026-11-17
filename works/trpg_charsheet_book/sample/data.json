@@ -1,0 +1,1902 @@
+{
+ "generatedAt": "2026-11-17T03:06:42.662Z",
+ "chars": [
+  {
+   "id": "demo-0",
+   "name": "朝霧 透",
+   "ruby": "あさぎり とおる",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/934821c34e17b423.webp",
+   "summary": "私立探偵",
+   "tags": [
+    "6版",
+    "黄昏探偵事務所 第一話：消えた依頼人HO1所長",
+    "雨宿りの館HO1探偵",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO1所長",
+    "月蝕のカルテHO4刑事",
+    "潮騒のレクイエム",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO1所長",
+    "影踏みの町HO3帰郷者"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 14,
+     "max": 14
+    },
+    {
+     "label": "MP",
+     "cur": 10,
+     "max": 10
+    },
+    {
+     "label": "SAN",
+     "cur": 35,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "8"
+    },
+    {
+     "label": "CON",
+     "value": "17"
+    },
+    {
+     "label": "POW",
+     "value": "10"
+    },
+    {
+     "label": "DEX",
+     "value": "10"
+    },
+    {
+     "label": "APP",
+     "value": "15"
+    },
+    {
+     "label": "SIZ",
+     "value": "13"
+    },
+    {
+     "label": "INT",
+     "value": "11"
+    },
+    {
+     "label": "EDU",
+     "value": "15"
+    }
+   ],
+   "skills": [
+    {
+     "label": "写真術",
+     "value": "70"
+    },
+    {
+     "label": "目星",
+     "value": "82"
+    },
+    {
+     "label": "心理学",
+     "value": "63"
+    },
+    {
+     "label": "言いくるめ",
+     "value": "47"
+    },
+    {
+     "label": "聞き耳",
+     "value": "58"
+    },
+    {
+     "label": "運転（自動車）",
+     "value": "53"
+    },
+    {
+     "label": "説得",
+     "value": "56"
+    },
+    {
+     "label": "回避",
+     "value": "59"
+    },
+    {
+     "label": "ナビゲート",
+     "value": "55"
+    }
+   ],
+   "updatedAt": 1790000000000,
+   "galleryHidden": false,
+   "notes": "職業: 私立探偵\n年齢: 31\n性別: 男\n身長: 178\n出身: 神奈川県\n\n雑居ビルの三階で小さな探偵事務所を営む。依頼の大半は猫探しと浮気調査だが、なぜか妙な事件ばかり引き寄せる。\n煙草はやめたと言い張っているが、胸ポケットにはいつも一箱入っている。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "黄昏探偵事務所 第一話：消えた依頼人HO1所長": "2024-02-10",
+    "雨宿りの館HO1探偵": "2024-03-02",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO1所長": "2024-04-21",
+    "月蝕のカルテHO4刑事": "2024-06-08",
+    "潮騒のレクイエム": "2024-08-15",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO1所長": "2024-10-12",
+    "影踏みの町HO3帰郷者": "2025-01-18"
+   },
+   "pls": {
+    "黄昏探偵事務所 第一話：消えた依頼人HO1所長": "2PL",
+    "雨宿りの館HO1探偵": "3PL",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO1所長": "2PL",
+    "月蝕のカルテHO4刑事": "4PL",
+    "潮騒のレクイエム": "2PL",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO1所長": "2PL",
+    "影踏みの町HO3帰郷者": "5PL以上"
+   },
+   "series": {
+    "黄昏探偵事務所 第一話：消えた依頼人HO1所長": "黄昏探偵事務所",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO1所長": "黄昏探偵事務所",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO1所長": "黄昏探偵事務所"
+   }
+  },
+  {
+   "id": "demo-1",
+   "name": "朝霧 透",
+   "ruby": "あさぎり とおる",
+   "system": "クトゥルフ神話TRPG 7版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/934821c34e17b423.webp",
+   "summary": "私立探偵",
+   "tags": [
+    "十三番目の客室HO4記者"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 13,
+     "max": 14
+    },
+    {
+     "label": "MP",
+     "cur": 10,
+     "max": 10
+    },
+    {
+     "label": "SAN",
+     "cur": 34,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "13"
+    },
+    {
+     "label": "CON",
+     "value": "14"
+    },
+    {
+     "label": "POW",
+     "value": "10"
+    },
+    {
+     "label": "DEX",
+     "value": "17"
+    },
+    {
+     "label": "APP",
+     "value": "12"
+    },
+    {
+     "label": "SIZ",
+     "value": "16"
+    },
+    {
+     "label": "INT",
+     "value": "14"
+    },
+    {
+     "label": "EDU",
+     "value": "14"
+    }
+   ],
+   "skills": [
+    {
+     "label": "オカルト",
+     "value": "80"
+    },
+    {
+     "label": "説得",
+     "value": "50"
+    },
+    {
+     "label": "鍵開け",
+     "value": "57"
+    },
+    {
+     "label": "言いくるめ",
+     "value": "81"
+    },
+    {
+     "label": "目星",
+     "value": "45"
+    },
+    {
+     "label": "応急手当",
+     "value": "62"
+    },
+    {
+     "label": "写真術",
+     "value": "40"
+    },
+    {
+     "label": "心理学",
+     "value": "81"
+    },
+    {
+     "label": "医学",
+     "value": "69"
+    }
+   ],
+   "updatedAt": 1789999000000,
+   "galleryHidden": false,
+   "notes": "職業: 私立探偵\n年齢: 32",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "十三番目の客室HO4記者": "2025-05-03"
+   },
+   "pls": {
+    "十三番目の客室HO4記者": "4PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-2",
+   "name": "久世 ひより",
+   "ruby": "くぜ ひより",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/71cf40c6a925004a.webp",
+   "summary": "大学生（民俗学）",
+   "tags": [
+    "6版",
+    "黄昏探偵事務所 第一話：消えた依頼人HO2助手",
+    "灯台守の手記HO2郷土史家",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO2助手",
+    "影踏みの町HO2迷子",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO2助手",
+    "硝子の鳥籠"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 11,
+     "max": 13
+    },
+    {
+     "label": "MP",
+     "cur": 17,
+     "max": 17
+    },
+    {
+     "label": "SAN",
+     "cur": 71,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "17"
+    },
+    {
+     "label": "CON",
+     "value": "8"
+    },
+    {
+     "label": "POW",
+     "value": "17"
+    },
+    {
+     "label": "DEX",
+     "value": "9"
+    },
+    {
+     "label": "APP",
+     "value": "17"
+    },
+    {
+     "label": "SIZ",
+     "value": "13"
+    },
+    {
+     "label": "INT",
+     "value": "14"
+    },
+    {
+     "label": "EDU",
+     "value": "10"
+    }
+   ],
+   "skills": [
+    {
+     "label": "聞き耳",
+     "value": "82"
+    },
+    {
+     "label": "鍵開け",
+     "value": "49"
+    },
+    {
+     "label": "説得",
+     "value": "69"
+    },
+    {
+     "label": "写真術",
+     "value": "46"
+    },
+    {
+     "label": "回避",
+     "value": "62"
+    },
+    {
+     "label": "目星",
+     "value": "65"
+    },
+    {
+     "label": "心理学",
+     "value": "75"
+    },
+    {
+     "label": "歴史",
+     "value": "83"
+    },
+    {
+     "label": "応急手当",
+     "value": "62"
+    }
+   ],
+   "updatedAt": 1789998000000,
+   "galleryHidden": false,
+   "notes": "職業: 大学生（民俗学）\n年齢: 20\n性別: 女\n身長: 154\n出身: 京都府\n\nフィールドワークと称して、気になる噂のある土地へすぐ出かけてしまう。\n朝霧探偵事務所でアルバイト中。時給より「面白い話」が報酬だと思っている。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "黄昏探偵事務所 第一話：消えた依頼人HO2助手": "2024-02-10",
+    "灯台守の手記HO2郷土史家": "2024-05-11",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO2助手": "2024-04-21",
+    "影踏みの町HO2迷子": "2025-01-18",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO2助手": "2024-10-12",
+    "硝子の鳥籠": "2025-03-09"
+   },
+   "pls": {
+    "黄昏探偵事務所 第一話：消えた依頼人HO2助手": "2PL",
+    "灯台守の手記HO2郷土史家": "2PL",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO2助手": "2PL",
+    "影踏みの町HO2迷子": "5PL以上",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO2助手": "2PL",
+    "硝子の鳥籠": "1PL"
+   },
+   "series": {
+    "黄昏探偵事務所 第一話：消えた依頼人HO2助手": "黄昏探偵事務所",
+    "黄昏探偵事務所 第二話：沈黙の鐘HO2助手": "黄昏探偵事務所",
+    "黄昏探偵事務所 第三話：硝煙と薔薇HO2助手": "黄昏探偵事務所"
+   }
+  },
+  {
+   "id": "demo-3",
+   "name": "鳴海 礼司",
+   "ruby": "なるみ れいじ",
+   "system": "クトゥルフ神話TRPG 7版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/37b0a5de0da6c5a6.webp",
+   "summary": "刑事",
+   "tags": [
+    "月蝕のカルテHO4刑事",
+    "十三番目の客室HO4記者",
+    "終電の向こう側HO2駅員",
+    "影踏みの町HO1案内人"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 12,
+     "max": 15
+    },
+    {
+     "label": "MP",
+     "cur": 9,
+     "max": 9
+    },
+    {
+     "label": "SAN",
+     "cur": 40,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "9"
+    },
+    {
+     "label": "CON",
+     "value": "12"
+    },
+    {
+     "label": "POW",
+     "value": "9"
+    },
+    {
+     "label": "DEX",
+     "value": "14"
+    },
+    {
+     "label": "APP",
+     "value": "13"
+    },
+    {
+     "label": "SIZ",
+     "value": "13"
+    },
+    {
+     "label": "INT",
+     "value": "13"
+    },
+    {
+     "label": "EDU",
+     "value": "15"
+    }
+   ],
+   "skills": [
+    {
+     "label": "写真術",
+     "value": "42"
+    },
+    {
+     "label": "医学",
+     "value": "50"
+    },
+    {
+     "label": "鍵開け",
+     "value": "77"
+    },
+    {
+     "label": "心理学",
+     "value": "84"
+    },
+    {
+     "label": "聞き耳",
+     "value": "47"
+    },
+    {
+     "label": "回避",
+     "value": "82"
+    },
+    {
+     "label": "図書館",
+     "value": "63"
+    },
+    {
+     "label": "運転（自動車）",
+     "value": "45"
+    },
+    {
+     "label": "歴史",
+     "value": "49"
+    }
+   ],
+   "updatedAt": 1789997000000,
+   "galleryHidden": false,
+   "notes": "職業: 刑事\n年齢: 38\n性別: 男\n身長: 182\n出身: 東京都\n\n捜査一課の叩き上げ。勘で動いて理屈は後からついてくる、と部下にぼやかれている。\n甘いものに目がなく、張り込みのお供はいつもあんぱん。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "月蝕のカルテHO4刑事": "2024-06-08",
+    "十三番目の客室HO4記者": "2025-05-03",
+    "終電の向こう側HO2駅員": "2024-11-30",
+    "影踏みの町HO1案内人": "2025-01-18"
+   },
+   "pls": {
+    "月蝕のカルテHO4刑事": "4PL",
+    "十三番目の客室HO4記者": "4PL",
+    "終電の向こう側HO2駅員": "3PL",
+    "影踏みの町HO1案内人": "5PL以上"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-4",
+   "name": "雪代 紬",
+   "ruby": "ゆきしろ つむぎ",
+   "system": "エモクロアTRPG",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/83f62baa14662da4.webp",
+   "summary": "和菓子職人",
+   "tags": [
+    "花葬HO2花屋",
+    "星降る夜の約束",
+    "残響HO2歌姫",
+    "夜明け前のパレードHO3猛獣使い"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 10,
+     "max": 14
+    },
+    {
+     "label": "MP",
+     "cur": 5,
+     "max": 5
+    }
+   ],
+   "stats": [
+    {
+     "label": "身体",
+     "value": "5"
+    },
+    {
+     "label": "器用",
+     "value": "2"
+    },
+    {
+     "label": "精神",
+     "value": "2"
+    },
+    {
+     "label": "五感",
+     "value": "3"
+    },
+    {
+     "label": "知力",
+     "value": "5"
+    },
+    {
+     "label": "魅力",
+     "value": "4"
+    },
+    {
+     "label": "社会",
+     "value": "4"
+    },
+    {
+     "label": "運勢",
+     "value": "6"
+    }
+   ],
+   "skills": [
+    {
+     "label": "運動",
+     "value": "7"
+    },
+    {
+     "label": "根性",
+     "value": "8"
+    },
+    {
+     "label": "芸術",
+     "value": "9"
+    },
+    {
+     "label": "社交術",
+     "value": "8"
+    },
+    {
+     "label": "知識",
+     "value": "9"
+    },
+    {
+     "label": "洞察",
+     "value": "6"
+    },
+    {
+     "label": "直感",
+     "value": "6"
+    }
+   ],
+   "updatedAt": 1789996000000,
+   "galleryHidden": false,
+   "notes": "職業: 和菓子職人\n年齢: 24\n性別: 女\n身長: 160\n出身: 石川県\n\n老舗の和菓子屋の跡取り娘。季節の上生菓子を作らせたら右に出る者はいない。\nおっとりしているようで頑固。一度決めたことは曲げない。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "花葬HO2花屋": "2024-04-06",
+    "星降る夜の約束": "2024-07-07",
+    "残響HO2歌姫": "2024-12-14",
+    "夜明け前のパレードHO3猛獣使い": "2025-04-26"
+   },
+   "pls": {
+    "花葬HO2花屋": "2PL",
+    "星降る夜の約束": "2PL",
+    "残響HO2歌姫": "3PL",
+    "夜明け前のパレードHO3猛獣使い": "4PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-5",
+   "name": "Elias Grey",
+   "ruby": "エリアス・グレイ",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/c2b39bf07e854936.webp",
+   "summary": "医師",
+   "tags": [
+    "6版",
+    "月蝕のカルテHO1外科医",
+    "十三番目の客室HO2宿泊客",
+    "深海図書館",
+    "白昼夢の標本室HO1蒐集家"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 15,
+     "max": 15
+    },
+    {
+     "label": "MP",
+     "cur": 11,
+     "max": 11
+    },
+    {
+     "label": "SAN",
+     "cur": 47,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "17"
+    },
+    {
+     "label": "CON",
+     "value": "17"
+    },
+    {
+     "label": "POW",
+     "value": "11"
+    },
+    {
+     "label": "DEX",
+     "value": "8"
+    },
+    {
+     "label": "APP",
+     "value": "11"
+    },
+    {
+     "label": "SIZ",
+     "value": "16"
+    },
+    {
+     "label": "INT",
+     "value": "15"
+    },
+    {
+     "label": "EDU",
+     "value": "15"
+    }
+   ],
+   "skills": [
+    {
+     "label": "医学",
+     "value": "68"
+    },
+    {
+     "label": "聞き耳",
+     "value": "40"
+    },
+    {
+     "label": "図書館",
+     "value": "77"
+    },
+    {
+     "label": "運転（自動車）",
+     "value": "67"
+    },
+    {
+     "label": "歴史",
+     "value": "74"
+    },
+    {
+     "label": "オカルト",
+     "value": "45"
+    },
+    {
+     "label": "言いくるめ",
+     "value": "55"
+    },
+    {
+     "label": "写真術",
+     "value": "72"
+    },
+    {
+     "label": "回避",
+     "value": "83"
+    }
+   ],
+   "updatedAt": 1789995000000,
+   "galleryHidden": false,
+   "notes": "職業: 医師\n年齢: 35\n性別: 男\n身長: 185\n出身: イギリス\n\n日本の大学病院に勤める外科医。日本語は流暢だが、ことわざの使い方がだいたい間違っている。\n休日は古書店巡り。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "月蝕のカルテHO1外科医": "2024-06-08",
+    "十三番目の客室HO2宿泊客": "2024-09-21",
+    "深海図書館": "2024-12-01",
+    "白昼夢の標本室HO1蒐集家": "2025-02-15"
+   },
+   "pls": {
+    "月蝕のカルテHO1外科医": "4PL",
+    "十三番目の客室HO2宿泊客": "4PL",
+    "深海図書館": "1PL",
+    "白昼夢の標本室HO1蒐集家": "2PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-6",
+   "name": "柊 真白",
+   "ruby": "ひいらぎ ましろ",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/116984e008ec801a.webp",
+   "summary": "画家",
+   "tags": [
+    "6版",
+    "ロスト",
+    "白昼夢の標本室HO2標本",
+    "硝子の鳥籠",
+    "雨宿りの館HO2館の相続人"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 13,
+     "max": 13
+    },
+    {
+     "label": "MP",
+     "cur": 15,
+     "max": 15
+    },
+    {
+     "label": "SAN",
+     "cur": 61,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "13"
+    },
+    {
+     "label": "CON",
+     "value": "13"
+    },
+    {
+     "label": "POW",
+     "value": "15"
+    },
+    {
+     "label": "DEX",
+     "value": "15"
+    },
+    {
+     "label": "APP",
+     "value": "15"
+    },
+    {
+     "label": "SIZ",
+     "value": "13"
+    },
+    {
+     "label": "INT",
+     "value": "9"
+    },
+    {
+     "label": "EDU",
+     "value": "8"
+    }
+   ],
+   "skills": [
+    {
+     "label": "ナビゲート",
+     "value": "65"
+    },
+    {
+     "label": "図書館",
+     "value": "46"
+    },
+    {
+     "label": "聞き耳",
+     "value": "54"
+    },
+    {
+     "label": "回避",
+     "value": "62"
+    },
+    {
+     "label": "応急手当",
+     "value": "50"
+    },
+    {
+     "label": "説得",
+     "value": "42"
+    },
+    {
+     "label": "オカルト",
+     "value": "42"
+    },
+    {
+     "label": "目星",
+     "value": "44"
+    },
+    {
+     "label": "医学",
+     "value": "68"
+    }
+   ],
+   "updatedAt": 1789994000000,
+   "galleryHidden": false,
+   "notes": "職業: 画家\n年齢: 27\n性別: 女\n身長: 165\n出身: 北海道\n\n白い絵の具しか使わない画家。見えないものを描く、と言っていた。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "白昼夢の標本室HO2標本": "2024-01-20",
+    "硝子の鳥籠": "2024-03-16",
+    "雨宿りの館HO2館の相続人": "2024-03-02"
+   },
+   "pls": {
+    "白昼夢の標本室HO2標本": "2PL",
+    "硝子の鳥籠": "1PL",
+    "雨宿りの館HO2館の相続人": "3PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-7",
+   "name": "七瀬 湊",
+   "ruby": "ななせ みなと",
+   "system": "エモクロアTRPG",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/6ab245c24233c546.webp",
+   "summary": "高校生",
+   "tags": [
+    "夜明け前のパレードHO4迷子",
+    "ひとりぼっちの観覧車",
+    "残響HO3聴衆"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 15,
+     "max": 16
+    },
+    {
+     "label": "MP",
+     "cur": 7,
+     "max": 7
+    }
+   ],
+   "stats": [
+    {
+     "label": "身体",
+     "value": "4"
+    },
+    {
+     "label": "器用",
+     "value": "6"
+    },
+    {
+     "label": "精神",
+     "value": "5"
+    },
+    {
+     "label": "五感",
+     "value": "4"
+    },
+    {
+     "label": "知力",
+     "value": "5"
+    },
+    {
+     "label": "魅力",
+     "value": "3"
+    },
+    {
+     "label": "社会",
+     "value": "5"
+    },
+    {
+     "label": "運勢",
+     "value": "6"
+    }
+   ],
+   "skills": [
+    {
+     "label": "知識",
+     "value": "5"
+    },
+    {
+     "label": "心理",
+     "value": "5"
+    },
+    {
+     "label": "運動",
+     "value": "9"
+    },
+    {
+     "label": "隠匿",
+     "value": "8"
+    },
+    {
+     "label": "直感",
+     "value": "3"
+    },
+    {
+     "label": "社交術",
+     "value": "9"
+    },
+    {
+     "label": "芸術",
+     "value": "4"
+    }
+   ],
+   "updatedAt": 1789993000000,
+   "galleryHidden": false,
+   "notes": "職業: 高校生\n年齢: 17\n性別: 男\n身長: 171\n出身: 静岡県\n\n水泳部のエース。考えるより先に体が動くタイプ。\n妹に頭が上がらない。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "夜明け前のパレードHO4迷子": "2025-04-26",
+    "ひとりぼっちの観覧車": "2024-08-03",
+    "残響HO3聴衆": "2024-12-14"
+   },
+   "pls": {
+    "夜明け前のパレードHO4迷子": "4PL",
+    "ひとりぼっちの観覧車": "1PL",
+    "残響HO3聴衆": "3PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-8",
+   "name": "七瀬 湊",
+   "ruby": "ななせ みなと",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/6ab245c24233c546.webp",
+   "summary": "高校生",
+   "tags": [
+    "6版",
+    "終電の向こう側HO3帰れない者",
+    "影踏みの町HO4旅芸人"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 14,
+     "max": 13
+    },
+    {
+     "label": "MP",
+     "cur": 8,
+     "max": 8
+    },
+    {
+     "label": "SAN",
+     "cur": 28,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "14"
+    },
+    {
+     "label": "CON",
+     "value": "12"
+    },
+    {
+     "label": "POW",
+     "value": "8"
+    },
+    {
+     "label": "DEX",
+     "value": "9"
+    },
+    {
+     "label": "APP",
+     "value": "15"
+    },
+    {
+     "label": "SIZ",
+     "value": "15"
+    },
+    {
+     "label": "INT",
+     "value": "10"
+    },
+    {
+     "label": "EDU",
+     "value": "16"
+    }
+   ],
+   "skills": [
+    {
+     "label": "運転（自動車）",
+     "value": "64"
+    },
+    {
+     "label": "図書館",
+     "value": "74"
+    },
+    {
+     "label": "聞き耳",
+     "value": "63"
+    },
+    {
+     "label": "説得",
+     "value": "57"
+    },
+    {
+     "label": "ナビゲート",
+     "value": "62"
+    },
+    {
+     "label": "歴史",
+     "value": "51"
+    },
+    {
+     "label": "目星",
+     "value": "72"
+    },
+    {
+     "label": "写真術",
+     "value": "75"
+    },
+    {
+     "label": "心理学",
+     "value": "53"
+    }
+   ],
+   "updatedAt": 1789992000000,
+   "galleryHidden": false,
+   "notes": "職業: 高校生\n年齢: 17",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "終電の向こう側HO3帰れない者": "2024-11-30",
+    "影踏みの町HO4旅芸人": "2025-01-18"
+   },
+   "pls": {
+    "終電の向こう側HO3帰れない者": "3PL",
+    "影踏みの町HO4旅芸人": "5PL以上"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-9",
+   "name": "御影 千歳",
+   "ruby": "みかげ ちとせ",
+   "system": "クトゥルフ神話TRPG 7版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/fbdc0e68b39ba4bf.webp",
+   "summary": "骨董商",
+   "tags": [
+    "十三番目の客室HO1支配人",
+    "灯台守の手記HO2郷土史家",
+    "雨宿りの館HO2館の相続人"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 13,
+     "max": 14
+    },
+    {
+     "label": "MP",
+     "cur": 13,
+     "max": 13
+    },
+    {
+     "label": "SAN",
+     "cur": 58,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "10"
+    },
+    {
+     "label": "CON",
+     "value": "14"
+    },
+    {
+     "label": "POW",
+     "value": "13"
+    },
+    {
+     "label": "DEX",
+     "value": "17"
+    },
+    {
+     "label": "APP",
+     "value": "13"
+    },
+    {
+     "label": "SIZ",
+     "value": "11"
+    },
+    {
+     "label": "INT",
+     "value": "14"
+    },
+    {
+     "label": "EDU",
+     "value": "13"
+    }
+   ],
+   "skills": [
+    {
+     "label": "写真術",
+     "value": "53"
+    },
+    {
+     "label": "オカルト",
+     "value": "85"
+    },
+    {
+     "label": "応急手当",
+     "value": "41"
+    },
+    {
+     "label": "回避",
+     "value": "44"
+    },
+    {
+     "label": "言いくるめ",
+     "value": "54"
+    },
+    {
+     "label": "運転（自動車）",
+     "value": "79"
+    },
+    {
+     "label": "心理学",
+     "value": "81"
+    },
+    {
+     "label": "図書館",
+     "value": "73"
+    },
+    {
+     "label": "歴史",
+     "value": "65"
+    }
+   ],
+   "updatedAt": 1789991000000,
+   "galleryHidden": false,
+   "notes": "職業: 骨董商\n年齢: 45\n性別: 女\n身長: 168\n出身: 奈良県\n\nいわくつきの品ばかり扱う古道具屋「御影堂」の女主人。\n品物の声が聞こえる、と冗談めかして言う。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "十三番目の客室HO1支配人": "2025-05-03",
+    "灯台守の手記HO2郷土史家": "2024-05-25",
+    "雨宿りの館HO2館の相続人": "2024-09-07"
+   },
+   "pls": {
+    "十三番目の客室HO1支配人": "4PL",
+    "灯台守の手記HO2郷土史家": "2PL",
+    "雨宿りの館HO2館の相続人": "3PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-10",
+   "name": "東雲 律",
+   "ruby": "しののめ りつ",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/e151edbdbc2f1695.webp",
+   "summary": "高校教師（国語）",
+   "tags": [
+    "6版",
+    "灯台守の手記HO1灯台守の孫",
+    "終電の向こう側HO1終電を逃した者",
+    "潮騒のレクイエム"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 11,
+     "max": 12
+    },
+    {
+     "label": "MP",
+     "cur": 15,
+     "max": 15
+    },
+    {
+     "label": "SAN",
+     "cur": 59,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "10"
+    },
+    {
+     "label": "CON",
+     "value": "13"
+    },
+    {
+     "label": "POW",
+     "value": "15"
+    },
+    {
+     "label": "DEX",
+     "value": "9"
+    },
+    {
+     "label": "APP",
+     "value": "16"
+    },
+    {
+     "label": "SIZ",
+     "value": "14"
+    },
+    {
+     "label": "INT",
+     "value": "13"
+    },
+    {
+     "label": "EDU",
+     "value": "17"
+    }
+   ],
+   "skills": [
+    {
+     "label": "目星",
+     "value": "43"
+    },
+    {
+     "label": "医学",
+     "value": "56"
+    },
+    {
+     "label": "聞き耳",
+     "value": "59"
+    },
+    {
+     "label": "図書館",
+     "value": "69"
+    },
+    {
+     "label": "心理学",
+     "value": "63"
+    },
+    {
+     "label": "説得",
+     "value": "65"
+    },
+    {
+     "label": "写真術",
+     "value": "59"
+    },
+    {
+     "label": "歴史",
+     "value": "68"
+    },
+    {
+     "label": "ナビゲート",
+     "value": "81"
+    }
+   ],
+   "updatedAt": 1789990000000,
+   "galleryHidden": false,
+   "notes": "職業: 高校教師（国語）\n年齢: 29\n性別: 男\n身長: 174\n出身: 宮城県\n\n生徒からは「りっちゃん先生」と呼ばれている。本人は不本意。\n怪談を授業の枕に使うので、夏になると人気が出る。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "灯台守の手記HO1灯台守の孫": "2024-05-11",
+    "終電の向こう側HO1終電を逃した者": "2024-11-30",
+    "潮騒のレクイエム": "2024-08-15"
+   },
+   "pls": {
+    "灯台守の手記HO1灯台守の孫": "2PL",
+    "終電の向こう側HO1終電を逃した者": "3PL",
+    "潮騒のレクイエム": "2PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-11",
+   "name": "葛葉 小夜",
+   "ruby": "くずのは さよ",
+   "system": "エモクロアTRPG",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/186247921db4df4c.webp",
+   "summary": "巫女",
+   "tags": [
+    "花葬HO1墓守",
+    "夜明け前のパレードHO2道化",
+    "残響HO2歌姫"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 12,
+     "max": 12
+    },
+    {
+     "label": "MP",
+     "cur": 8,
+     "max": 5
+    }
+   ],
+   "stats": [
+    {
+     "label": "身体",
+     "value": "6"
+    },
+    {
+     "label": "器用",
+     "value": "4"
+    },
+    {
+     "label": "精神",
+     "value": "6"
+    },
+    {
+     "label": "五感",
+     "value": "6"
+    },
+    {
+     "label": "知力",
+     "value": "5"
+    },
+    {
+     "label": "魅力",
+     "value": "4"
+    },
+    {
+     "label": "社会",
+     "value": "5"
+    },
+    {
+     "label": "運勢",
+     "value": "2"
+    }
+   ],
+   "skills": [
+    {
+     "label": "社交術",
+     "value": "7"
+    },
+    {
+     "label": "芸術",
+     "value": "8"
+    },
+    {
+     "label": "根性",
+     "value": "3"
+    },
+    {
+     "label": "運動",
+     "value": "3"
+    },
+    {
+     "label": "製作",
+     "value": "7"
+    },
+    {
+     "label": "洞察",
+     "value": "8"
+    },
+    {
+     "label": "隠匿",
+     "value": "3"
+    }
+   ],
+   "updatedAt": 1789989000000,
+   "galleryHidden": false,
+   "notes": "職業: 巫女\n年齢: 19\n性別: 女\n身長: 152\n出身: 三重県\n\n山あいの小さな神社の娘。狐の面を集めるのが趣味。\n人の嘘がなんとなくわかる。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "花葬HO1墓守": "2024-04-06",
+    "夜明け前のパレードHO2道化": "2025-04-26",
+    "残響HO2歌姫": "2024-10-05"
+   },
+   "pls": {
+    "花葬HO1墓守": "2PL",
+    "夜明け前のパレードHO2道化": "4PL",
+    "残響HO2歌姫": "3PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-12",
+   "name": "槙野 慧",
+   "ruby": "まきの けい",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/ff60d9c49079800f.webp",
+   "summary": "雑誌記者",
+   "tags": [
+    "6版",
+    "十三番目の客室HO4記者",
+    "雨宿りの館HO3迷い込んだ旅人",
+    "影踏みの町HO5影"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 13,
+     "max": 15
+    },
+    {
+     "label": "MP",
+     "cur": 15,
+     "max": 15
+    },
+    {
+     "label": "SAN",
+     "cur": 68,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "10"
+    },
+    {
+     "label": "CON",
+     "value": "12"
+    },
+    {
+     "label": "POW",
+     "value": "15"
+    },
+    {
+     "label": "DEX",
+     "value": "14"
+    },
+    {
+     "label": "APP",
+     "value": "14"
+    },
+    {
+     "label": "SIZ",
+     "value": "9"
+    },
+    {
+     "label": "INT",
+     "value": "17"
+    },
+    {
+     "label": "EDU",
+     "value": "17"
+    }
+   ],
+   "skills": [
+    {
+     "label": "応急手当",
+     "value": "40"
+    },
+    {
+     "label": "心理学",
+     "value": "45"
+    },
+    {
+     "label": "目星",
+     "value": "44"
+    },
+    {
+     "label": "図書館",
+     "value": "42"
+    },
+    {
+     "label": "説得",
+     "value": "63"
+    },
+    {
+     "label": "歴史",
+     "value": "45"
+    },
+    {
+     "label": "医学",
+     "value": "50"
+    },
+    {
+     "label": "写真術",
+     "value": "56"
+    },
+    {
+     "label": "運転（自動車）",
+     "value": "70"
+    }
+   ],
+   "updatedAt": 1789988000000,
+   "galleryHidden": false,
+   "notes": "職業: 雑誌記者\n年齢: 33\n性別: 女\n身長: 167\n出身: 大阪府\n\nオカルト雑誌『月刊アビス』の記者。締め切り前は三日寝ない。\nネタのためなら立入禁止の札も読めなくなる。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "十三番目の客室HO4記者": "2024-09-21",
+    "雨宿りの館HO3迷い込んだ旅人": "2024-09-07",
+    "影踏みの町HO5影": "2025-01-18"
+   },
+   "pls": {
+    "十三番目の客室HO4記者": "4PL",
+    "雨宿りの館HO3迷い込んだ旅人": "3PL",
+    "影踏みの町HO5影": "5PL以上"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-13",
+   "name": "篠原 灯",
+   "ruby": "しのはら あかり",
+   "system": "クトゥルフ神話TRPG 7版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/66bc99746096ec97.webp",
+   "summary": "看護師",
+   "tags": [
+    "月蝕のカルテHO2看護師",
+    "終電の向こう側HO2駅員"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 13,
+     "max": 14
+    },
+    {
+     "label": "MP",
+     "cur": 15,
+     "max": 15
+    },
+    {
+     "label": "SAN",
+     "cur": 61,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "10"
+    },
+    {
+     "label": "CON",
+     "value": "10"
+    },
+    {
+     "label": "POW",
+     "value": "15"
+    },
+    {
+     "label": "DEX",
+     "value": "15"
+    },
+    {
+     "label": "APP",
+     "value": "14"
+    },
+    {
+     "label": "SIZ",
+     "value": "16"
+    },
+    {
+     "label": "INT",
+     "value": "9"
+    },
+    {
+     "label": "EDU",
+     "value": "10"
+    }
+   ],
+   "skills": [
+    {
+     "label": "聞き耳",
+     "value": "82"
+    },
+    {
+     "label": "目星",
+     "value": "42"
+    },
+    {
+     "label": "説得",
+     "value": "74"
+    },
+    {
+     "label": "応急手当",
+     "value": "56"
+    },
+    {
+     "label": "言いくるめ",
+     "value": "72"
+    },
+    {
+     "label": "運転（自動車）",
+     "value": "44"
+    },
+    {
+     "label": "鍵開け",
+     "value": "58"
+    },
+    {
+     "label": "医学",
+     "value": "43"
+    },
+    {
+     "label": "心理学",
+     "value": "53"
+    }
+   ],
+   "updatedAt": 1789987000000,
+   "galleryHidden": false,
+   "notes": "職業: 看護師\n年齢: 26\n性別: 女\n身長: 158\n出身: 福岡県\n\n救急外来の看護師。夜勤明けのラーメンが生きがい。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "月蝕のカルテHO2看護師": "2024-06-08",
+    "終電の向こう側HO2駅員": "2025-02-22"
+   },
+   "pls": {
+    "月蝕のカルテHO2看護師": "4PL",
+    "終電の向こう側HO2駅員": "3PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-14",
+   "name": "霧島 蒼",
+   "ruby": "きりしま あお",
+   "system": "クトゥルフ神話TRPG 6版",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/0e25084bb62f0f56.webp",
+   "summary": "ピアニスト",
+   "tags": [
+    "6版",
+    "白昼夢の標本室HO1蒐集家",
+    "潮騒のレクイエム"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 10,
+     "max": 14
+    },
+    {
+     "label": "MP",
+     "cur": 11,
+     "max": 11
+    },
+    {
+     "label": "SAN",
+     "cur": 41,
+     "max": 99
+    }
+   ],
+   "stats": [
+    {
+     "label": "STR",
+     "value": "11"
+    },
+    {
+     "label": "CON",
+     "value": "11"
+    },
+    {
+     "label": "POW",
+     "value": "11"
+    },
+    {
+     "label": "DEX",
+     "value": "8"
+    },
+    {
+     "label": "APP",
+     "value": "11"
+    },
+    {
+     "label": "SIZ",
+     "value": "12"
+    },
+    {
+     "label": "INT",
+     "value": "16"
+    },
+    {
+     "label": "EDU",
+     "value": "16"
+    }
+   ],
+   "skills": [
+    {
+     "label": "鍵開け",
+     "value": "47"
+    },
+    {
+     "label": "歴史",
+     "value": "63"
+    },
+    {
+     "label": "心理学",
+     "value": "68"
+    },
+    {
+     "label": "ナビゲート",
+     "value": "45"
+    },
+    {
+     "label": "図書館",
+     "value": "82"
+    },
+    {
+     "label": "写真術",
+     "value": "71"
+    },
+    {
+     "label": "目星",
+     "value": "73"
+    },
+    {
+     "label": "言いくるめ",
+     "value": "83"
+    },
+    {
+     "label": "説得",
+     "value": "71"
+    }
+   ],
+   "updatedAt": 1789986000000,
+   "galleryHidden": false,
+   "notes": "職業: ピアニスト\n年齢: 22\n性別: 男\n身長: 176\n出身: 兵庫県\n\nコンクール荒らしと呼ばれる若手ピアニスト。楽譜にない音が聞こえることがある。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "白昼夢の標本室HO1蒐集家": "2024-01-20",
+    "潮騒のレクイエム": "2025-03-29"
+   },
+   "pls": {
+    "白昼夢の標本室HO1蒐集家": "2PL",
+    "潮騒のレクイエム": "2PL"
+   },
+   "series": {}
+  },
+  {
+   "id": "demo-15",
+   "name": "伏見 環",
+   "ruby": "ふしみ たまき",
+   "system": "エモクロアTRPG",
+   "sourceSite": "",
+   "sourceUrl": "",
+   "image": "img/2aa23393a42a09dc.webp",
+   "summary": "図書館司書",
+   "tags": [
+    "花葬HO2花屋",
+    "星降る夜の約束"
+   ],
+   "resources": [
+    {
+     "label": "HP",
+     "cur": 14,
+     "max": 16
+    },
+    {
+     "label": "MP",
+     "cur": 8,
+     "max": 7
+    }
+   ],
+   "stats": [
+    {
+     "label": "身体",
+     "value": "2"
+    },
+    {
+     "label": "器用",
+     "value": "3"
+    },
+    {
+     "label": "精神",
+     "value": "4"
+    },
+    {
+     "label": "五感",
+     "value": "3"
+    },
+    {
+     "label": "知力",
+     "value": "2"
+    },
+    {
+     "label": "魅力",
+     "value": "4"
+    },
+    {
+     "label": "社会",
+     "value": "5"
+    },
+    {
+     "label": "運勢",
+     "value": "5"
+    }
+   ],
+   "skills": [
+    {
+     "label": "社交術",
+     "value": "6"
+    },
+    {
+     "label": "運動",
+     "value": "8"
+    },
+    {
+     "label": "製作",
+     "value": "9"
+    },
+    {
+     "label": "洞察",
+     "value": "7"
+    },
+    {
+     "label": "知識",
+     "value": "8"
+    },
+    {
+     "label": "直感",
+     "value": "8"
+    },
+    {
+     "label": "隠匿",
+     "value": "5"
+    }
+   ],
+   "updatedAt": 1789985000000,
+   "galleryHidden": false,
+   "notes": "職業: 図書館司書\n年齢: 30\n性別: 女\n身長: 162\n出身: 愛知県\n\n市立図書館の司書。返却期限を過ぎた本の借り主は、どこまでも追いかける。",
+   "palette": "",
+   "piece": null,
+   "dates": {
+    "花葬HO2花屋": "2024-11-09",
+    "星降る夜の約束": "2025-02-01"
+   },
+   "pls": {
+    "花葬HO2花屋": "2PL",
+    "星降る夜の約束": "2PL"
+   },
+   "series": {}
+  }
+ ]
+}
