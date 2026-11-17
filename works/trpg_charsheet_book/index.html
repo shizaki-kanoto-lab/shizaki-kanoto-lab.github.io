@@ -112,6 +112,11 @@
     .shot { margin: 0 auto; max-width: 380px; }
     .shot img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 14px 34px -22px rgba(0, 0, 0, .55); }
     .shot figcaption { margin-top: 10px; font-size: .9rem; color: var(--muted); }
+    .shot.wide { max-width: none; margin: 20px 0 0; }
+    .shots .shot.wide { margin: 0; }
+    .shots { margin-top: 20px; align-items: start; }
+    h3.sub { margin: 40px 0 6px; font-size: 1.15rem; }
+    .buttons.center { justify-content: center; }
     ul.check { list-style: none; padding: 0; margin: 0; }
     ul.check li { padding-left: 1.6em; position: relative; margin: 6px 0; }
     ul.check li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-ink); font-weight: 700; }
@@ -241,6 +246,26 @@
           <img src="screen.png" alt="拡張機能「シート帳へ送る」のポップアップ。キャラッシュのエモクロアTRPGのシートで、ステータス3件・能力値8件・技能17件・チャットパレットありと読み取れたこと、キャラクター名、「追加済み：シナリオを更新」のボタン、全42人のうち新規0人・追加済み42人と出ている" width="408" height="493" loading="lazy">
           <figcaption>キャラッシュでシートを開いて、拡張機能のアイコンを押したところ。読み取れた項目と、Notion に追加済みかどうかが出ます。シートの URL はぼかしています。</figcaption>
         </figure>
+
+        <h3 class="sub">ギャラリー</h3>
+        <p>Notion に集めたキャラを、立ち絵つきで並べるページです。下の画面とサンプルページは、架空のキャラクターで作っています。</p>
+        <figure class="shot wide">
+          <img src="gallery-list.jpg" alt="ギャラリーの一覧。立ち絵つきのタイルが5列に並び、それぞれにふりがな・名前・最初に通過したシナリオ・システムが出ている。ロストしたキャラはグレーの立ち絵に LOST の印がついている" width="1600" height="1312" loading="lazy">
+          <figcaption>一覧。システムごとに切り替えられ、通過したシナリオの多い順に並びます。ロストしたキャラには LOST の印がつきます。</figcaption>
+        </figure>
+        <div class="grid two shots">
+          <figure class="shot wide">
+            <img src="gallery-profile.jpg" alt="キャラクターのページ。立ち絵の横にプロフィール、人物紹介、能力値、技能、通過シナリオが並び、シリーズものは各話がシリーズ名の下にまとまっている" width="1200" height="1068" loading="lazy">
+            <figcaption>キャラのページ。能力値・技能と、通過したシナリオを HO つきで出します。</figcaption>
+          </figure>
+          <figure class="shot wide">
+            <img src="gallery-ho.jpg" alt="HOの傾向のページ。PL人数ごとに、どのHO番号で遊んだかを棒グラフで数えている" width="1200" height="937" loading="lazy">
+            <figcaption>HO の傾向。PL 人数ごとに、どの HO で遊ぶことが多いかを数えます。</figcaption>
+          </figure>
+        </div>
+        <div class="buttons center">
+          <a class="btn primary" href="sample/">サンプルのギャラリーを開く</a>
+        </div>
       </div>
     </section>
 
@@ -289,7 +314,7 @@
         <h2>閲覧ページは非公開です</h2>
         <div class="notice">
           <p>一覧ページにはキャラクターの立ち絵が並びます。立ち絵は描いてくださった方の作品なので、著作権に配慮して閲覧ページは公開していません。</p>
-          <p>このページと GitHub では、しくみと拡張機能のコードを公開しています。</p>
+          <p>このページと GitHub では、しくみと拡張機能のコードを公開しています。見た目は、架空のキャラクターで作った<a href="sample/">サンプルのギャラリー</a>で確かめられます。</p>
         </div>
       </div>
     </section>
