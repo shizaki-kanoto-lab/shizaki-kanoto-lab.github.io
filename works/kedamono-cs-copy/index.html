@@ -66,6 +66,9 @@
     }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
+    /* 日本語の改行：最後の行が数文字だけにならないようにする。見出しは文節で折り返す（対応ブラウザのみ） */
+    body { line-break: strict; text-wrap: pretty; }
+    h1, h2, h3, h4 { word-break: auto-phrase; text-wrap: balance; }
     body {
       margin: 0;
       background: var(--bg);
@@ -82,7 +85,7 @@
     .hero .kicker { margin: 0 0 6px; font-size: .78rem; letter-spacing: .2em; color: var(--muted); }
     .hero h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.4; letter-spacing: .06em; margin: 0 0 14px; }
     .hero h1 span { display: inline-block; }
-    .hero .lead { font-size: 1.08rem; color: var(--muted); margin: 0; max-width: 40em; }
+    .hero .lead { font-size: 1.08rem; color: var(--muted); margin: 0; }
     .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
     .btn { display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; border: 2px solid var(--primary); }
     .btn.primary { background: var(--primary); color: var(--primary-text); }
@@ -331,5 +334,26 @@
       mq.addEventListener('change', function () { apply(btn.getAttribute('data-mode')); });
     })();
   </script>
+<script>
+// 文の最後の数文字を切り離さない（「ます。」だけが次の行に残るのを防ぐ）
+(function () {
+  if (!window.Intl || !Intl.Segmenter) return;
+  var seg = new Intl.Segmenter('ja', { granularity: 'word' });
+  document.querySelectorAll('p, li, figcaption, .tip').forEach(function (el) {
+    if (el.querySelector('p, li, div')) return;
+    var n = el.lastChild;
+    while (n && n.nodeType === 3 && !n.data.trim()) n = n.previousSibling;
+    if (!n || n.nodeType !== 3) return;
+    var text = n.data.replace(/\s+$/, ''), words = Array.from(seg.segment(text)), tail = '';
+    while (words.length && tail.length < 6) tail = words.pop().segment + tail;
+    if (tail.length > 14 || el.textContent.trim().length < tail.length * 2) return;
+    var span = document.createElement('span');
+    span.style.whiteSpace = 'nowrap';
+    span.textContent = tail.replace(/^\s+/, '');
+    n.data = text.slice(0, text.length - span.textContent.length);
+    el.insertBefore(span, n.nextSibling);
+  });
+})();
+</script>
 </body>
 </html>
