@@ -149,6 +149,9 @@
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+  /* 日本語の改行：最後の行が数文字だけにならないようにする。見出しは文節で折り返す（対応ブラウザのみ） */
+  body { line-break: strict; text-wrap: pretty; }
+  h1, h2, h3, h4 { word-break: auto-phrase; text-wrap: balance; }
   body {
     margin: 0;
     overflow-x: clip; /* ヒーロー画像の光彩がスマホで右にはみ出して横スクロールになるのを防ぐ */
@@ -246,7 +249,7 @@
     letter-spacing: -.02em;
   }
   .hero h1 .line { display: block; white-space: nowrap; }
-  .hero p.lead { margin: 0; color: var(--muted); font-size: 1.0625rem; max-width: 32em; line-break: strict; }
+  .hero p.lead { margin: 0; color: var(--muted); font-size: 1.0625rem; }
   .stats { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .stats li { font-size: .8125rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 3px 12px; font-family: var(--font-display); font-weight: 600; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
@@ -1110,6 +1113,27 @@
       if (progress >= 1) fire(); else setP(0);
     }, { passive: true });
   })();
+</script>
+<script>
+// 文の最後の数文字を切り離さない（「ます。」だけが次の行に残るのを防ぐ）
+(function () {
+  if (!window.Intl || !Intl.Segmenter) return;
+  var seg = new Intl.Segmenter('ja', { granularity: 'word' });
+  document.querySelectorAll('p, li, figcaption, .tip').forEach(function (el) {
+    if (el.querySelector('p, li, div')) return;
+    var n = el.lastChild;
+    while (n && n.nodeType === 3 && !n.data.trim()) n = n.previousSibling;
+    if (!n || n.nodeType !== 3) return;
+    var text = n.data.replace(/\s+$/, ''), words = Array.from(seg.segment(text)), tail = '';
+    while (words.length && tail.length < 6) tail = words.pop().segment + tail;
+    if (tail.length > 14 || el.textContent.trim().length < tail.length * 2) return;
+    var span = document.createElement('span');
+    span.style.whiteSpace = 'nowrap';
+    span.textContent = tail.replace(/^\s+/, '');
+    n.data = text.slice(0, text.length - span.textContent.length);
+    el.insertBefore(span, n.nextSibling);
+  });
+})();
 </script>
 </body>
 </html>
