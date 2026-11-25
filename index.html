@@ -208,7 +208,6 @@
     display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center;
     padding: 56px 0 72px;
   }
-  @media (min-width: 900px) { .hero { grid-template-columns: 1.1fr 1fr; gap: 56px; padding: 96px 0 112px; } }
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 5px 14px 5px 6px; border-radius: 999px;
@@ -226,7 +225,7 @@
     letter-spacing: -.02em;
   }
   .hero h1 .line { display: block; white-space: nowrap; }
-  .hero p.lead { margin: 0; color: var(--muted); font-size: 1.0625rem; max-width: 32em; }
+  .hero p.lead { margin: 0; color: var(--muted); font-size: 1.0625rem; max-width: 32em; line-break: strict; }
   .stats { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .stats li { font-size: .8125rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 3px 12px; font-family: var(--font-display); font-weight: 600; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
@@ -234,7 +233,7 @@
   /* hero visual：画像がなければ作品カードを重ねた図を表示 */
   .hero-visual-wrap { position: relative; }
   .hero-visual-wrap::before {
-    content: ""; position: absolute; inset: -14% -10%; z-index: -1;
+    content: ""; position: absolute; inset: -14% -4%; z-index: -1;
     background: radial-gradient(closest-side, rgba(150,80,200,.38), transparent);
     filter: blur(24px);
   }
@@ -269,6 +268,25 @@
   .stack .w2 i { background: linear-gradient(135deg, #e8590c, #ae3ec9); }
   .stack .w3 i { background: linear-gradient(135deg, #4c6ef5, #7950f2); }
   .hero-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 3; }
+
+  /* 広い画面では全体を暗いパネルにして、画像を右側の背景に溶かす（ライト・ダーク共通） */
+  @media (min-width: 760px) {
+    .hero { position: relative; display: block; margin: 40px 0 64px; padding: 48px 44px; border-radius: 24px; background: #140c1c; overflow: hidden; box-shadow: var(--shadow-hover); }
+    .hero > div:first-child { position: relative; z-index: 2; max-width: 430px; }
+    .hero h1 { color: #fff; font-size: 2.75rem; }
+    .hero .grad-text { background: linear-gradient(115deg, #a78bfa, #e08be0 60%, #ff8fc4); -webkit-background-clip: text; background-clip: text; }
+    .hero p.lead { color: #e2d9ea; font-size: 1rem; }
+    .hero .pill, .hero .stats li, .hero .btn:not(.solid) { background: rgba(20,12,28,.6); color: #ece3f3; border-color: rgba(255,255,255,.22); }
+    .hero .btn:not(.solid):hover { border-color: #c79ae0; }
+    .hero-visual-wrap { position: absolute; inset: 0 0 0 auto; width: 72%; }
+    .hero-visual-wrap::before { display: none; }
+    .hero-visual {
+      height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; box-shadow: none; background: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent 8%, rgba(0,0,0,.22) 32%, rgba(0,0,0,.45) 46%, #000 66%);
+              mask-image: linear-gradient(90deg, transparent 8%, rgba(0,0,0,.22) 32%, rgba(0,0,0,.45) 46%, #000 66%);
+    }
+    .hero-visual img { object-position: 100% 50%; }
+  }
 
   /* ---------- buttons ---------- */
   .btn {
@@ -577,7 +595,7 @@
         <span class="line">TRPG の面倒を、</span>
         <span class="line"><span class="grad-text">ツールで</span>片づける。</span>
       </h1>
-      <p class="lead">遊ぶ中で「ここが面倒だな」と思ったところを、自分で作って解決してきたツールの置き場です。日程調整、キャラクターシートの管理、Discord サーバーの運営まわりのものを公開しています。</p>
+      <p class="lead">TRPGを遊ぶ中で手間に感じたところを、自分で作って解決してきたツールの置き場です。<br>日程調整、キャラクターシートの管理、Discord サーバーの運営まわりのものを公開しています。</p>
       <ul class="stats" aria-label="使っている技術">
         <li>6 Works</li>
         <li>Google Apps Script</li>
