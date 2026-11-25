@@ -492,7 +492,6 @@
   .card:has(.card-link) .body { cursor: pointer; }
   .card .links { position: relative; z-index: 2; }
   .card h4 { margin: 0 0 2px; font-family: var(--font-title); font-size: 1.25rem; font-weight: 600; line-height: 1.45; word-break: auto-phrase; -webkit-text-stroke: .5px currentColor; }
-  .card h4 .nb { display: inline-block; }
   .card .repo { margin: 0 0 12px; font-size: .8125rem; color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
   .card p.desc { margin: 0 0 16px; font-size: .9375rem; flex: 1; }
   .tags { display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
@@ -501,9 +500,9 @@
   @media (min-width: 720px) {
     .card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; }
     .card .body { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
-    /* 題名がどのカードでも1行に収まる大きさにする（いちばん長い題名が18文字ぶん） */
+    /* 題名がどのカードでも1行に収まる大きさにする（いちばん長い題名が15文字ぶん） */
     .card .head { container-type: inline-size; }
-    .card h4 { font-size: 1.125rem; font-size: min(1.125rem, 5.4cqi); }
+    .card h4 { font-size: min(1.25rem, 6.4cqi); }
   }
   .tags li { background: var(--tag-bg); color: var(--muted); font-size: .75rem; padding: 2px 10px; border-radius: 999px; font-family: var(--font-display); font-weight: 600; }
   .links { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 8px; }
@@ -727,13 +726,13 @@
 
         <article class="card">
           <div class="thumb">
-            <span class="ph">ケダモノオペラキャラクターシート管理</span>
+            <span class="ph">ケダモノオペラCS管理</span>
             <img data-view="image" src="images/works/kedamono-cs-copy.jpg?v=2" alt="赤い幕の劇場の舞台に「非公式ファンツール ケダモノオペラ キャラクターシート管理」と書かれた羊皮紙が浮かび、まわりを小さな紙片が舞っている" width="1500" height="600" loading="lazy" onerror="thumbImgError(this)">
-            <img data-view="capture" style="object-position: 50% 0" src="images/works/kedamono-cs-copy-capture.jpg" alt="ケダモノオペラキャラクターシート管理の画面。「コピーしました」と「もう一度コピー」ボタンの下に、Discord に貼れる形のキャラクターシートが出ている" width="720" height="730" loading="lazy" onerror="thumbImgError(this)">
+            <img data-view="capture" style="object-position: 50% 0" src="images/works/kedamono-cs-copy-capture.jpg" alt="ケダモノオペラCS管理の画面。「コピーしました」と「もう一度コピー」ボタンの下に、Discord に貼れる形のキャラクターシートが出ている" width="720" height="730" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <div class="head">
-              <h4><a class="card-link" href="https://shizaki-kanoto.is-a.dev/works/kedamono-cs-copy/"><span class="nb">ケダモノオペラ</span><span class="nb">キャラクターシート管理</span></a></h4>
+              <h4><a class="card-link" href="https://shizaki-kanoto.is-a.dev/works/kedamono-cs-copy/">ケダモノオペラCS管理</a></h4>
               <p class="repo">kedamono-cs-copy</p>
             </div>
             <p class="desc">『ケダモノオペラ』のキャラクターシートを Notion で管理し、ボタンひとつで Discord に貼れる形にコピーします。ファンが作った非公式ツールです。</p>
@@ -775,13 +774,13 @@
 
         <article class="card">
           <div class="thumb">
-            <span class="ph">TRPG予定をDiscordに投稿するツール</span>
+            <span class="ph">卓予定のDiscord連携ツール</span>
             <img data-view="image" src="images/works/trpg_schedule2discord.jpg" alt="「セッション予定を、毎月Discordへ」の見出しの下で、カレンダーから矢印がノートパソコンの画面の予定リストへ伸びている。横に20面ダイス" width="1280" height="670" loading="lazy" onerror="thumbImgError(this)">
             <img data-view="capture" style="object-position: 50% 0" src="images/works/trpg_schedule2discord-capture.jpg" alt="Discord に投稿されたセッション予定の例。「2026年11月」「2026年12月」の見出しの下にシナリオ名と GM / PL が並び、最後に空き日程の確認先のリンクがある" width="1200" height="738" loading="lazy" onerror="thumbImgError(this)">
           </div>
           <div class="body">
             <div class="head">
-              <h4><a class="card-link" href="https://shizaki-kanoto.is-a.dev/trpg_schedule2discord/">TRPG予定をDiscordに投稿するツール</a></h4>
+              <h4><a class="card-link" href="https://shizaki-kanoto.is-a.dev/trpg_schedule2discord/">卓予定のDiscord連携ツール</a></h4>
               <p class="repo">trpg_schedule2discord</p>
             </div>
             <p class="desc">Google カレンダーのセッション予定を月ごとにまとめ、毎月1回、今月から6か月分を Discord に自動で投稿します。同じシナリオは1件にまとめ、GM か PL かも添えて知らせます。</p>
