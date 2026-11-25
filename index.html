@@ -460,7 +460,7 @@
   @media (min-width: 720px) {
     .card { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; }
     .card .body { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
-    .card h4 { align-self: end; } /* 題名の行数が違っても、リポジトリ名をすぐ下に置く */
+    .card h4 { align-self: center; } /* 題名の行数が違うときは、2行ぶんの高さの真ん中に置く */
   }
   .tags li { background: var(--tag-bg); color: var(--muted); font-size: .75rem; padding: 2px 10px; border-radius: 999px; font-family: var(--font-display); font-weight: 600; }
   .links { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 8px; }
